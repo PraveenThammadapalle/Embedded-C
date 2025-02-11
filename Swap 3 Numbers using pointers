@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+void swapThree(int *a, int *b, int *c) {
+    // Swap a with b
+    *a = *a + *b;
+    *b = *a - *b;
+    *a = *a - *b;
+
+    // Swap b with c
+    *b = *b + *c;
+    *c = *b - *c;
+    *b = *b - *c;
+
+    // Swap a with b again
+    *a = *a + *b;
+    *b = *a - *b;
+    *a = *a - *b;
+}
+
+int main() {
+    int a = 8, b = 77, c = 55;
+    swapThree(&a, &b, &c);
+    printf("a = %d, b = %d, c = %d\n", a, b, c);  // Output: a = 77, b = 55, c = 8
+    return 0;
+}
