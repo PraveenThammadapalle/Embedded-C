@@ -9,3 +9,8 @@ int main()
     return 0;
 
 }
+
+
+/*Explanation:
+First, it checks if X > Y. If true, then it checks if X > Z. If both conditions are true, X is the largest.
+If X > Y is false, it checks Y > Z. If true, it returns Y. Otherwise, it returns Z.   */
