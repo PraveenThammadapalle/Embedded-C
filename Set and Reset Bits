@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <stdint.h>
+
+uint32_t SetBit(uint32_t Data, uint8_t bitno)
+{
+    Data |= 1<<bitno;
+
+    return Data;
+}
+
+uint32_t ResetBit(uint32_t Data, uint8_t bitno)
+{
+    Data &= ~(1<<bitno);
+
+    return Data;
+}
+
+int main()
+{
+    uint32_t input = 7, Output = ResetBit(input,2);  //0111 0011
+    printf("Input = 0x%x and Output = 0x%x", input, Output);
+
+    return 0;
+}
