@@ -1,0 +1,36 @@
+/* #include <stdio.h>
+
+struct MyStruct {
+    char a;    // 1 byte
+    int b;     // 4 bytes
+    char c;    // 1 byte
+    float d;   // 4 bytes
+    short e;   // 2 bytes
+};
+
+int main() {
+    printf("Size of structure: %ld bytes\n", sizeof(struct MyStruct));
+    return 0;
+}  */
+
+
+
+#include <stdio.h>
+
+union MyUnion {
+    int a;    // 1 byte
+    int b;     // 4 bytes
+    int c;    // 1 byte
+    int d;   // 4 bytes
+    short e;   // 2 bytes
+};
+
+int main() {
+    
+    union MyUnion std;
+    std.a = -1;
+    std.b = 254;
+    printf("Size of union: %ld bytes\n", sizeof(union MyUnion));
+    printf("Size of union: %ld bytes\n", sizeof(std.a));
+    return 0;
+}
