@@ -1,0 +1,11 @@
+#include <stdio.h>
+#include <stdint.h>
+
+#define MAX(X,Y,Z)  ((X>Y)?((X>Z)?X:Z):(Y>Z)?Y:Z)
+int main()
+{
+    printf("MAX = %d", MAX(20,11,15) );
+    
+    return 0;
+
+}
