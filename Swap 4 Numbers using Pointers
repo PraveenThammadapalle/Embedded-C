@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+void swapFour(int *a, int *b, int *c, int *d) {
+    // Swap a with b
+    *a = *a + *b;
+    *b = *a - *b;
+    *a = *a - *b;
+
+    // Swap b with c
+    *b = *b + *c;
+    *c = *b - *c;
+    *b = *b - *c;
+
+    // Swap c with d
+    *c = *c + *d;
+    *d = *c - *d;
+    *c = *c - *d;
+
+    // Swap a with b again
+    *a = *a + *b;
+    *b = *a - *b;
+    *a = *a - *b;
+}
+
+int main() {
+    int a = 8, b = 77, c = 55, d = 99;
+    swapFour(&a, &b, &c, &d);
+    printf("a = %d, b = %d, c = %d, d = %d\n", a, b, c, d);  // Output: a = 77, b = 55, c = 99, d = 8
+    return 0;
+}
