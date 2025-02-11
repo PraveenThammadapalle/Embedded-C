@@ -1,0 +1,14 @@
+#include <stdio.h>
+
+int main() {
+    int i =10;
+    
+    //int j = ++i + i + i++ + ++i + i;   //59  normal right to left  -->
+    
+    // for printing left to right  <--
+    
+    printf("%d %d %d %d %d ", ++i, i, i++, ++i, i ); 
+    
+    //printf("%b", i);
+    
+}
