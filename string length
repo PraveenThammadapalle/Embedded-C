@@ -1,0 +1,12 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+
+        char str[] ="Praveen";
+        
+        printf(" %ld %ld", sizeof(str), strlen(str));
+}
+
+//sizeof(str) gives 8 (including the null terminator).
+//strlen(str) gives 7 (only the characters in the string).
