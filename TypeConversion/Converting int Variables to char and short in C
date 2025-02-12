@@ -1,0 +1,14 @@
+int main() {
+    int num = 65; // ASCII value for 'A'
+    char letter = (char)num; // Explicit conversion
+
+    printf("Integer: %d\n", num);
+    printf("Character: %c\n", letter); // Outputs: A
+
+    // Example of overflow
+    num = 300; // Outside the range of char (for signed char)
+    letter = (char)num; // Conversion may lead to unexpected results
+    printf("Converted character from 300: %c\n", letter); // May output non-printable character
+
+    return 0;
+}
