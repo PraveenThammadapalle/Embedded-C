@@ -1,0 +1,19 @@
+#include <stdio.h>
+
+void sum (int a, int b)
+{
+    printf("sum = %d", (a+b));
+}
+
+int main()
+{
+
+    void (*fptr) (int,int);
+    fptr = sum;
+    
+    fptr(5,6);  //// Calling sum using the function pointer
+   // sum(5,6);
+
+    return 0;
+    
+}
