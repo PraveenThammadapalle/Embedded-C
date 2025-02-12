@@ -17,3 +17,37 @@ int main()
     return 0;
     
 }
+
+
+
+
+
+
+
+
+/////////////////////////////////////////
+
+/*
+#include <stdio.h>
+
+int sum (int a, int b)
+{
+    //printf("sum = %d", (a+b));
+    return a+b;
+}
+
+int main()
+{
+    int i;
+    int (*fptr) (int,int);
+    fptr = sum;
+    
+    printf("%d", fptr(5,6));
+   // sum(5,6);
+
+  // return 0;
+    
+}
+
+*/
+////////////////////////////////////
