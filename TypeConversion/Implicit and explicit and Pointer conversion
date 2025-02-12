@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int main() {
+    // Implicit casting
+    int a = 5;
+    float b = a; // Implicit cast to float
+    printf("Implicit cast: %d -> %f\n", a, b);
+
+    // Explicit casting
+    double c = 9.8;
+    int d = (int)c; // Explicit cast to int
+    printf("Explicit cast: %f -> %d\n", c, d);
+
+    // Pointer casting
+    double value = 3.14;
+    void *ptr = &value; // Assign address of double to void pointer
+    double *doublePtr = (double *)ptr; // Cast back to double pointer
+    printf("Pointer cast: %p -> %f\n", (void *)ptr, *doublePtr);
+
+    return 0;
+}
+
+
+
+
