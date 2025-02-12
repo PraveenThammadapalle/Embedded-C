@@ -1,0 +1,32 @@
+#include <stdio.h > 
+     int main() 
+     {
+ int *p = 10;
+ printf(“ %u\n”, (unsigned int)p);
+ printf(“%d\n”,*p);
+     }
+
+The Above code mistake
+so fixed that code as per below points:
+
+1. int num = 10; creates an integer variable num and assigns it the value 10.
+2. int *p = &num; makes p a pointer to num. Now, p holds the address of num.
+3. The first printf uses %p to correctly print the pointer address.
+4. The second printf prints the value of num via dereferencing the pointer (*p).
+
+
+
+
+
+#include <stdio.h>
+
+int main() 
+{
+    int num = 10;
+    int *p = &num;  // Pointer now points to a valid memory address (the address of num)
+    
+    printf("%p\n", (void*)p);  // Correct way to print the pointer
+    printf("%d\n", *p);        // Dereferencing p to get the value stored at that address
+    
+    return 0;
+}
