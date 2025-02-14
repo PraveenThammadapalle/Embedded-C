@@ -1,0 +1,34 @@
+
+//Pointer to a structure
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Rectangle
+{
+    int length;
+    int breadth;
+    
+};
+
+int main()
+{
+    struct Rectangle r = {10,5};
+    struct Rectangle *p = &r;
+    
+    r.length = 15;
+
+    (*p).length = 20;    // we can access structure variable 
+    //p->length = 20;    //  we can access structure variable this also
+
+    p->breadth = 50;
+    
+   // struct Rectangle *p;
+   // p = (struct Rectangle *)malloc (sizeof(struct Rectangle));
+    
+    //p->length = 10;
+    //p->breadth = 5;
+        printf("length = %d\n", p->length);
+        printf("breadth = %d", p->breadth);
+}
+
