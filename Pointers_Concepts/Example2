@@ -8,3 +8,6 @@
             *ptr = *ptr + 1;
             printf("%d,%d", *ptr, a); 
           }
+
+// ++(*ptr)   ===  value is pre-incremented in pointer
+//  ++ptr     ===  Pointer addreess will increment (depentds data type)
