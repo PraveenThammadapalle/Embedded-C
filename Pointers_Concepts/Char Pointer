@@ -3,7 +3,8 @@
 int main() {
     int x = 256;       // 'x' is an integer initialized to 256
     char *p = &x;      // 'p' is a pointer to a character, initialized to the address of 'x'
-    *++p = 2;          // 'p' is incremented, then dereferenced to assign 2 to that location
+    *++p = 2;          // 'p' is incremented, then dereferenced to assign 2 to that location   //512
+    //*p = 2;    //output 258
     printf("%d",x);    // Prints the value of 'x'
 }
 
