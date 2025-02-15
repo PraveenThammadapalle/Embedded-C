@@ -1,0 +1,34 @@
+#include<stdio.h>
+
+int main() {
+    int x = 256;       // 'x' is an integer initialized to 256
+    char *p = &x;      // 'p' is a pointer to a character, initialized to the address of 'x'
+    *++p = 2;          // 'p' is incremented, then dereferenced to assign 2 to that location
+    printf("%d",x);    // Prints the value of 'x'
+}
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Key Points:
+int x = 256;: An integer x is initialized with the value 256.
+char *p = &x;: A char pointer p is set to point to the address of x. This is where things get tricky.
+*++p = 2;: This increments the pointer p (which initially points to x), making it point to the next byte in memory. Then, the value at that location (now *p) is set to 2.
+printf("%d", x);: Finally, it prints the value of x.
+Explanation:
+In most systems, an int is 4 bytes (on many 32-bit or 64-bit systems). When you use a char *p to point to x, it refers to the first byte of x. The pointer p is incremented, so it points to the second byte of x. Then, *p = 2; writes the value 2 into that byte.
+
+In a little-endian system (which is common), the bytes of 256 would be represented as:
+
+
+Copy
+00 02 00 00
+This changes the value of x to 512 (in decimal). Hence, x will be updated to 512, and the output will be:
+
+Copy
+512
+Conclusion:
+When you run this code, the output will be:
+
+Copy
+512
