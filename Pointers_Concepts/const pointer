@@ -1,8 +1,30 @@
- #include<stdio.h>
+///Constant Pointer////
+#include<stdio.h>
      int main()
      {
         int const *p = 5;
         int q;
         p = &q;
             printf("%d",++(*p)); 
+     }
+
+
+////Constant int -- constant pointer//////
+ #include<stdio.h>
+     int main()
+     {
+         int x = 10;
+         int const *const p;
+         p = &x;
+         printf("%d\n", *p);
+     }
+
+///////////////
+ #include<stdio.h>
+     int main()
+     {
+         int x = 10;
+         int const *const p = &x;
+         //p = &x;
+         printf("%d\n", *p);
      }
