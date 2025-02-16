@@ -1,0 +1,28 @@
+
+//Qualcom interview question
+//reverse the number
+
+//input:  0x1234567890ABCDEF
+//output: 0xFEDCBA0987654321
+
+#include <stdio.h>
+#include <stdint.h>
+
+uint64_t reverse_nibble(uint64_t input_num)
+{
+    uint64_t result = 0;
+    for(int i=0; i<16; i++)
+    {
+        result = (result <<4) | (input_num & 0xF);
+        input_num >>=4;
+    }
+    return result;
+}
+
+int main()
+{
+    uint64_t input_num = 0x1234567890ABCDEF;
+    uint64_t reversed_num = reverse_nibble (input_num);
+    printf("0x%llx", reversed_num);
+    return 0;
+}
