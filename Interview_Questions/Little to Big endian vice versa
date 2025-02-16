@@ -1,0 +1,77 @@
+  //einfochip interview Questions
+  //3. Converst Little Endian to Big Endian and vice versa
+  
+  #include<stdio.h>
+  int convert_endian(int num)
+  {
+      return ((num>>24)&0x000000FF) | ((num>>8)&0x0000FF00) | ((num<<8) & 0x00FF0000) | ((num<<24)&0xFF000000);
+  }
+  int main()
+  {
+      int num = 0x12345678;
+      int converted_value = convert_endian(num);
+      printf("original:0x%x\n",num);
+      
+      printf("converted: 0x%x\n", converted_value);
+      return 0;
+  }
+////////////////////////////////////////////////////////////////
+/*
+In computing, the terms little-endian and big-endian refer to the order in which the bytes of a multi-byte data type (such as an integer) are stored in memory. These two formats handle the arrangement of bytes in different ways:
+
+Little-Endian:
+Little-endian means that the least significant byte (LSB) is stored first, at the lowest memory address.
+In other words, the byte representing the smallest part of the number (the least significant byte) is placed at the lower memory address.
+Example:
+For the 4-byte integer 0x12345678, in little-endian, the bytes will be stored in memory as follows:
+markdown
+Copy
+Address | Value
+----------------
+0x00    | 0x78
+0x01    | 0x56
+0x02    | 0x34
+0x03    | 0x12
+Big-Endian:
+Big-endian means that the most significant byte (MSB) is stored first, at the lowest memory address.
+The byte representing the largest part of the number (the most significant byte) is placed at the lower memory address.
+Example:
+For the same integer 0x12345678, in big-endian, the bytes will be stored in memory as follows:
+markdown
+Copy
+Address | Value
+----------------
+0x00    | 0x12
+0x01    | 0x34
+0x02    | 0x56
+0x03    | 0x78
+Converting Between Little Endian and Big Endian:
+When converting from one endianness to another, you need to reverse the order of the bytes. This is done by shifting the bytes in the integer and placing them in their new positions.
+
+The function you've provided is a byte-swapping function, which effectively converts an integer from little-endian to big-endian or vice versa.
+
+Let's break it down:
+
+num >> 24 shifts the most significant byte of num to the least significant byte position.
+num >> 8 shifts the second byte from the left to the second byte position on the right.
+num << 8 shifts the third byte from the left to the third byte position on the right.
+num << 24 shifts the least significant byte to the most significant byte position.
+Each of these shifted values is masked using bitwise AND (&) with a mask (0xFF, 0xFF00, etc.) to isolate the relevant byte.
+
+After isolating the bytes, the function uses bitwise OR (|) to combine them into a single integer that represents the number in the opposite endianness.
+
+Example:
+For num = 0x12345678, the following operations would happen:
+
+((num >> 24) & 0x000000FF) would isolate the most significant byte 0x12.
+((num >> 8) & 0x0000FF00) would isolate the second byte 0x34.
+((num << 8) & 0x00FF0000) would isolate the third byte 0x56.
+((num << 24) & 0xFF000000) would isolate the least significant byte 0x78.
+These isolated bytes are then combined into 0x78563412, which is the original number in big-endian form if the original num was in little-endian form.
+
+Output of the Program:
+Original number (0x12345678) is in little-endian format.
+After conversion, it is printed as 0x78563412, which represents the number in big-endian format.
+Thus, the conversion function swaps the byte order of the integer, effectively switching the system's endianness.
+
+*/
