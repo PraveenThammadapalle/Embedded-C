@@ -1,0 +1,38 @@
+  //einfochip interview Questions
+  //
+  //1. How to check Endianness of a system 
+  
+  #include<stdio.h>
+
+  void main()
+  {
+      int i;
+      unsigned int num = 0x12345678;
+      unsigned char *byte = (unsigned char *) & num;
+      
+      printf("memory representation:");
+      for (int i =0; i<sizeof(num); i++);
+      {
+          printf("%02x",byte[i]);
+      }
+      printf("\n");
+      
+      if(byte[0] == 0x78)
+      {
+          printf("LITTELE ENDIAN");
+      }
+      else if (byte[0] == 0x12)
+      {
+          printf("BIG ENDIAN");
+      }
+      else {
+          printf("unkown");
+      }
+     
+  }
+  
+  
+
+
+
+
