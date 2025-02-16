@@ -1,0 +1,25 @@
+//input : how to travel from Hyderabad to Banglore
+//output : how to travel moef Hyderabad to Banglore
+#include <stdio.h>
+#include <string.h>
+
+void revers_word(char *str, const char *target)
+{
+    char *pos = strstr(str,target);
+    
+    if(pos)
+    {
+        int len = strlen(target);
+        strncpy(pos, "moef", len);
+    }
+  
+}
+
+int main()
+{
+    char str[] = "how to travel from Hyderabad to Banglore";
+    revers_word(str,"from");
+    printf("Modified sentence: %s", str);
+    return 0;
+}
+
