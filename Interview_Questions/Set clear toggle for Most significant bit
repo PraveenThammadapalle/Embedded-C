@@ -1,0 +1,75 @@
+#include <stdio.h>
+
+// Function to get the position of the most significant set bit (MSB)
+void find_MSB_position(int num) {
+    if (num == 0) {
+        printf("MSB set bit position: None\n");
+    } else {
+        int pos = sizeof(num) * 8; // Start from the most significant bit position (assumes 32-bit int)
+        
+        while ((num & (1 << (pos - 1))) == 0) {
+            pos--;
+        }
+
+        printf("MSB set bit position: %d\n", pos);
+    }
+}
+
+// Function to set the bit at a specific position
+void set_bit(int *num, int pos) {
+    *num |= (1 << (pos - 1));
+}
+
+// Function to clear the bit at a specific position
+void clear_bit(int *num, int pos) {
+    *num &= ~(1 << (pos - 1));
+}
+
+// Function to toggle the bit at a specific position
+void toggle_bit(int *num, int pos) {
+    *num ^= (1 << (pos - 1));
+}
+
+// Function to check if the bit at a specific position is set (1) or clear (0)
+int check_bit(int num, int pos) {
+    return (num & (1 << (pos - 1))) != 0;
+}
+
+int main() {
+    int num, pos;
+
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    // Find the position of the most significant set bit
+    find_MSB_position(num);
+
+    // Example of setting a bit
+    printf("Enter position to set a bit: ");
+    scanf("%d", &pos);
+    set_bit(&num, pos);
+    printf("Number after setting bit at position %d: %d\n", pos, num);
+
+    // Example of clearing a bit
+    printf("Enter position to clear a bit: ");
+    scanf("%d", &pos);
+    clear_bit(&num, pos);
+    printf("Number after clearing bit at position %d: %d\n", pos, num);
+
+    // Example of toggling a bit
+    printf("Enter position to toggle a bit: ");
+    scanf("%d", &pos);
+    toggle_bit(&num, pos);
+    printf("Number after toggling bit at position %d: %d\n", pos, num);
+
+    // Example of checking if a bit is set
+    printf("Enter position to check if bit is set: ");
+    scanf("%d", &pos);
+    if (check_bit(num, pos)) {
+        printf("Bit at position %d is set (1).\n", pos);
+    } else {
+        printf("Bit at position %d is clear (0).\n", pos);
+    }
+
+    return 0;
+}
