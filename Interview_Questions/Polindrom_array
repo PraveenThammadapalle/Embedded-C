@@ -1,0 +1,39 @@
+//Qualcom interview question
+
+//example
+//int arr[] = {1,2,3,2,1}; = after reverse = {1,2,3,2,1} this is polindrome
+
+#include <stdio.h>
+
+int polindrom(int arr[], int size)
+{
+    int start = 0;
+    int end = size-1;
+    
+    while(start < end)
+    {
+        if(arr[start]!=arr[end])
+        {
+            return 0;
+        }
+        start ++;
+        end--;
+    }
+    return 1;
+}
+
+int main()
+{
+    int arr[] = {1,2,3,2,1};
+    int size = sizeof(arr)/sizeof(arr[0]);
+    if(polindrom(arr,size))
+    {
+        printf("the array is polincdrom\n");
+    }
+    else
+    {
+        printf("not polincdrom\n");
+        
+    }
+    return 0;
+}
