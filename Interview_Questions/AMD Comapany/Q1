@@ -18,7 +18,8 @@ int main()
     {
         for(int j=0;j<size-1-i;j++)
         {
-            if(arr[j]>arr[j+1])
+            //if(arr[j]>arr[j+1])   //accending order
+            if(arr[j]<arr[j+1])    //deccending order
             {
                 temp = arr[j];
                 arr[j] = arr[j+1];
