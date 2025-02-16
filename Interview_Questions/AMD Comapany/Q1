@@ -27,8 +27,10 @@ int main()
             }
         }
     }
+//based on condition print the message
     printf("sorted array:");
     //printf("Elemts in accending order:");  //same for bubble sort and accending order small to high
+        printf("Elemts in deccending order:");  //same for bubble sort and accending order high to small
     for(int i=0; i<size;i++)
     {
         printf("%d ", arr[i]);
