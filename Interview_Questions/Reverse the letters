@@ -1,0 +1,32 @@
+#include<stdio.h>
+#include<string.h>
+
+void main() {
+    char str[100];  // Declare a character array to hold the string
+    int left, right, temp;
+
+    // Take input string from user
+    printf("Enter the string: ");
+    fgets(str, sizeof(str), stdin);  // Read string, using fgets to handle spaces
+
+    // Remove the newline character added by fgets if any
+    str[strcspn(str, "\n")] = '\0';
+
+    left = 0;
+    right = strlen(str) - 1;
+
+    // Reverse the string by swapping characters from both ends
+    while (left < right) {
+        // Swap characters at positions left and right
+        temp = str[left];
+        str[left] = str[right];
+        str[right] = temp;
+
+        // Move the pointers towards the center
+        left++;
+        right--;
+    }
+
+    // Print the reversed string
+    printf("Reversed string: %s", str);
+}
