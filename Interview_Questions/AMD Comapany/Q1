@@ -35,5 +35,9 @@ int main()
     {
         printf("%d ", arr[i]);
     }
+    printf("\n");
+    
+    printf("2nd largest element in array: %d", arr[2]);   //after deccending order only we find the 2nd 3rd largest element
+// and after accending order only we find the 2nd and 3rd and 4rt smallest elemt in the array
     return 0;
 }
