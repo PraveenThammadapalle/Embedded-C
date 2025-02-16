@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+void main()
+{
+    int num;
+    int once = 0, zero = 0;
+    printf("enter the number:");
+    scanf("%d",&num);
+    
+    while(num>0)
+    {
+        if((num&1)==1)
+        {
+            once++;
+        }
+        else
+        {
+            zero++;
+        }
+        num = num>>1;
+    }
+    printf("number of zero's:%d",zero);
+    printf("number of once's:%d",once);
+}
