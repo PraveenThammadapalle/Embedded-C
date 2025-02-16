@@ -1,0 +1,26 @@
+#include<stdio.h>
+
+void main() {
+    int num, rev = 0, digit;
+    
+    printf("Enter the number: ");
+    scanf("%d", &num);  // Corrected to use &num to get the input
+    
+    while(num > 0) {
+        digit = num % 10;  // Extract the last digit
+        rev = (rev * 10) + digit;  // Build the reversed number
+        num = num / 10;  // Remove the last digit from num
+    }
+    
+    printf("Reversed number: %d", rev);  // Output the reversed number
+}
+
+
+Example:
+Input: 1234
+Process:
+Extract 4 from 1234, reverse becomes 4, and the number becomes 123.
+Extract 3 from 123, reverse becomes 43, and the number becomes 12.
+Extract 2 from 12, reverse becomes 432, and the number becomes 1.
+Extract 1 from 1, reverse becomes 4321, and the number becomes 0.
+Output: 4321
