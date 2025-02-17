@@ -1,0 +1,9 @@
+#include <stdio.h>
+      void main()
+      {
+          char *s= "hello";
+          char *p = s + 2;
+          printf("%c\t%c\t", *p^32, s[1]^32);
+          
+          printf("%d\n%d\n",*s,*p);  //*s = 104(ASCII)  *p =  108(ASCII)
+      }
