@@ -1,0 +1,17 @@
+ #include <stdio.h>
+int main()
+          {
+                int i = 10;
+                void *p = &i;
+                //printf("%d\n", (int *)*p);
+                printf("%d\n", *(int*)p);
+                return 0;
+        }
+
+/////////////////
+/*Dereferencing the void * Pointer:
+
+*(int*)p:
+To dereference a void *, you must first cast it to the appropriate type. In this case, (int*)p casts the void * pointer to an int * (pointer to an integer).
+Once it's cast to int *, we can safely dereference it using * to access the value it points to.
+Since p points to i (which is 10), *(int*)p will yield 10.  */
