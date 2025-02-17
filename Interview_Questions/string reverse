@@ -1,5 +1,5 @@
 //input : how to travel from Hyderabad to Banglore
-//output : how to travel moef Hyderabad to Banglore
+//output : how to travel morf Hyderabad to Banglore
 #include <stdio.h>
 #include <string.h>
 
@@ -10,7 +10,7 @@ void revers_word(char *str, const char *target)
     if(pos)
     {
         int len = strlen(target);
-        strncpy(pos, "moef", len);
+        strncpy(pos, "morf", len);
     }
   
 }
