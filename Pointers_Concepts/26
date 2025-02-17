@@ -1,0 +1,10 @@
+#include<stdio.h>
+
+int main()
+{
+    const int ary[4] = {1, 2, 3, 4};
+    int *p = ary + 4;
+    *p = 7;  // Attempting to modify memory out of bounds
+    ary[3] = 6;  // Attempting to modify a const array
+    printf("%d", ary[4]);  // Attempting to print an out-of-bounds element
+}
