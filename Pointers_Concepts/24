@@ -1,0 +1,29 @@
+#include <stdio.h>
+        void foo(int*);
+        
+        int main()
+        {
+            int i = 10,j=30,*p = &i;
+            foo(p++);
+            foo(p);
+        }
+        void foo(int *p)
+        {
+            printf("%d\n", *p);
+        }
+
+
+/* Initialization:
+
+int i = 10, j = 30; — Variables i and j are initialized.
+int *p = &i; — Pointer p is initialized to point to i.
+First Call (foo(p++)):
+
+p++ is a post-increment operation.
+This means that the pointer p is passed to foo with the original value (pointing to i), but p is incremented after the value is passed.
+So, foo(p++) passes the pointer pointing to i, and the value of *p (dereferencing it) is 10.
+After this call, p is incremented and now points to j (because i and j are adjacent in memory).
+Second Call (foo(p)):
+
+Now, p points to j (after the increment from the previous call).
+So, foo(p) prints the value of *p, which is 30.    */
