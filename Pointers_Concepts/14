@@ -1,0 +1,10 @@
+#include<stdio.h>
+      int main()
+      {
+ 
+        char a[] = {10,20,30,40,50},i;
+        char *p = a;   // Output: 10 20 30 40 50
+        //int *p = a;    // Output: 10 0  0  0  20  //due to memory spaces for integer allocated only 4 bytes
+            for(i=0;i<5;i++)
+           printf("%d ", *p++);
+      }
