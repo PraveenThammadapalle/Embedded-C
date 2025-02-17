@@ -1,0 +1,8 @@
+#include <stdio.h>
+        int main()
+        {
+            double *ptr = 100;
+            printf("%u\n", ptr);  //output : 100
+            ptr = ptr + 2;
+            printf("%u\n", ptr);    //output : 116   double means 8bytes so 8+8 = 16 ==> 100 + 16 = 116
+        }
