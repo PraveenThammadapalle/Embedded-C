@@ -1,0 +1,37 @@
+#include <stdio.h>
+        int main()
+        {
+            char a[4] = {1, 2, 3, 4};   //int 4 bytes(for each element) soo adress will add by 4 bytes
+            void *p = &a[1];
+            void *ptr = &a[3];
+            int n = 1;
+            n = ptr - p;
+           // int n = (int*)ptr - (int*)p;  // Subtract the pointers after casting to int *
+            printf("%d %u %u\n", n,ptr,p);  //this is for addresses
+        }
+/*
+#include <stdio.h>
+int main()
+{
+    int a[4] = {1, 2, 3, 4};
+    void *p = &a[1];  // Pointer to the second element of array 'a' (value 2)
+    void *ptr = &a[2];  // Pointer to the third element of array 'a' (value 3)
+    
+    // Cast the void pointers to int * before performing subtraction
+    int n = (int*)ptr - (int*)p;  // Subtract the pointers after casting to int *
+    
+    printf("%d\n", n);  // Output the result
+}
+
+Explanation of the Fix:
+Casting void * to int *:
+We cast p and ptr to int * because the array a is an array of ints. So, the ptr and p pointers are pointing to int elements.
+Pointer Subtraction:
+Once the pointers are cast to int *, subtracting them gives the difference in terms of the number of int elements between the two pointers.
+Since ptr points to a[2] and p points to a[1], the subtraction will result in 1, because the pointer ptr is one position ahead of p in the array.
+
+Output:
+
+1
+*/
+
