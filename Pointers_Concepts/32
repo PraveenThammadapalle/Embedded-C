@@ -1,0 +1,12 @@
+#include <stdio.h>
+#include <string.h>
+        int main()
+        {
+            char *str = "hello, world\n";
+            str[5] = '.';
+            printf("%s\n", str);
+            return 0;
+        }
+char str[] = "hello, world\n"; creates a modifiable array with enough space to hold the string.
+Now, str[5] = '.'; modifies the 6th character of the string, which is allowed because str is a mutable array, not a string literal.
+The program will print "hello. world".
