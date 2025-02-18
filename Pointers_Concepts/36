@@ -1,0 +1,18 @@
+#include<stdio.h>
+       int main() 
+       {
+             int a = 5,b = 4,c = 9;
+             *(a>b ? &a : &b) = (a+b)>c;
+             printf("%d  %d\n",a,b);
+       }
+       
+       
+Explanation:
+Conditional Operator: (a > b ? &a : &b) is evaluating whether a > b. If a is greater than b, &a is used (address of a), otherwise, &b is used (address of b).
+The value being assigned to *(&a) or *(&b) is the result of (a + b) > c, which evaluates to either 1 (true) or 0 (false), since a + b (9) is not greater than c (9), the result will be 0.
+The printf function will then print the values of a and b.
+Output:
+Since (a + b) > c evaluates to 0, the assignment will set either a or b to 0. Given that a > b, a will be modified.
+
+Copy
+0 4
