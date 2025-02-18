@@ -1,0 +1,51 @@
+#include<stdio.h>
+        int main()
+        {
+             int i;
+             double a = 5.2;
+             char *ptr;
+             ptr = (char *)&a;
+             for(i=0;i<=7;i++)
+             printf("%d\n",*ptr++);
+             return 0;
+        }
+        
+Explanation:
+You declare a double variable a and a char* pointer ptr.
+You cast the address of a (which is a double*) to a char*, so you can access the memory byte by byte.
+You then loop through 8 bytes (since a double is typically 8 bytes in most systems) and print each byte's value.
+Code Breakdown:
+c
+Copy
+#include<stdio.h>
+
+int main() {
+    int i;
+    double a = 5.2;  // Double variable
+    char *ptr;       // Pointer to char (to access bytes)
+    
+    ptr = (char *)&a;  // Cast the address of 'a' to a char pointer
+    
+    // Loop through all 8 bytes of the double variable 'a'
+    for (i = 0; i <= 7; i++) {
+        printf("%d\n", *ptr++);  // Print each byte of 'a'
+    }
+    
+    return 0;
+}
+Expected Output:
+The output will be the individual bytes of the double variable a in memory, printed as integers. Since 5.2 is a double, its binary representation is system-dependent (i.e., it can vary based on the architecture of your machine). For example, on a little-endian system, it may display something like:
+
+Copy
+245
+0
+0
+0
+0
+0
+0
+64
+Key Points:
+Pointer Arithmetic: The ptr++ increments the pointer by one byte each time, allowing you to read the next byte of the double.
+Memory Representation: The way a double is represented in memory depends on the system's architecture and the IEEE 754 standard for floating-point numbers.
+Endianness: The byte order (little-endian vs. big-endian) affects the way the bytes are stored in memory, so the printed bytes may appear in a different order depending on your machine.
