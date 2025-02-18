@@ -1,0 +1,15 @@
+#include<stdio.h>
+#include<string.h>
+        int main()
+        {
+            char *str = "hello, world\n";
+            //char *strc = "good morning\n";
+            char strc[50];// = "good morning\n";
+            strcpy(strc, str);
+            printf("%s\n", strc);
+            
+            return 0;
+        }
+    /*
+    Both str and strc point to string literals, and attempting to modify strc (by using strcpy) 
+    will cause undefined behavior because strc is pointing to a string literal that should not be modified.*/
