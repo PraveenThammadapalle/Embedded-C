@@ -1,0 +1,110 @@
+
+#include<stdio.h>
+
+void main()
+{
+    char a[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";  // Character array
+    int i, *p = a;  // Pointer `p` is declared as `int *` but assigned to `char *a`
+    
+    for(i = 0; i < 5; i++)
+        printf("%d\t", *p++);
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////////
+Step-by-Step Analysis
+Step 1: Issue with int *p = a;
+a is a character array (char[]), but p is an integer pointer (int *).
+This leads to incompatible pointer assignment.
+The correct way would be:
+
+char *p = a;
+Compiling this code may produce a warning but may still run.
+Step 2: Memory Layout of a[]
+
+Address    Value (char)
+--------   -------------
+a[0]       'A' (0x41 in ASCII)
+a[1]       'B' (0x42)
+a[2]       'C' (0x43)
+a[3]       'D' (0x44)
+a[4]       'E' (0x45)
+...
+Step 3: Dereferencing p
+Since p is an int *, *p tries to read 4 bytes at a time (on a 32-bit system).
+But a is a character array, where each element is 1 byte.
+As a result, *p will read four consecutive bytes, interpreting them as an int.
+Expected Output (Little-Endian System)
+Understanding How *p Reads Memory
+On a little-endian system (common in x86 processors), memory is stored least-significant byte first.
+When p (which is int *) points to a[0], it reads the first 4 bytes together.
+
+Address    Value (Char)   Interpreted as `int`
+--------   ------------   -------------------
+a[0]       'A' (0x41)     (0x44434241) = 1145258561
+a[1]       'B' (0x42)
+a[2]       'C' (0x43)
+a[3]       'D' (0x44)
+a[4]       'E' (0x45)     (0x48474645) = 1212366549
+...
+Output Interpretation
+First iteration (*p):
+
+Reads 'A', 'B', 'C', 'D' together as an int (0x44434241 = 1145258561).
+p++ moves by 4 bytes (due to int * type), now pointing to 'E'.
+Second iteration (*p):
+
+Reads 'E', 'F', 'G', 'H' (0x48474645 = 1212366549).
+p++ moves to 'I'.
+Third iteration (*p):
+
+Reads 'I', 'J', 'K', 'L' (0x4C4B4A49 = 1279474537).
+p++ moves to 'M'.
+Fourth iteration (*p):
+
+Reads 'M', 'N', 'O', 'P' (0x504F4E4D = 1346582525).
+p++ moves to 'Q'.
+Fifth iteration (*p):
+
+Reads 'Q', 'R', 'S', 'T' (0x54535251 = 1413690513).
+Final Output (Typical on Little-Endian)
+
+1145258561    1212366549    1279474537    1346582525    1413690513
+(Note: Values may vary slightly depending on the system's architecture.)
+
+Corrected Version
+To properly iterate over characters and print their ASCII values:
+
+
+#include<stdio.h>
+
+int main()
+{
+    char a[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";  
+    int i;
+    char *p = a;  // Corrected pointer type
+
+    for(i = 0; i < 5; i++)
+        printf("%d\t", *p++);  // Prints ASCII values of A, B, C, D, E
+
+    return 0;
+}
+Corrected Output
+65    66    67    68    69
+(ASCII values of 'A', 'B', 'C', 'D', 'E')
+
+Key Takeaways
+Pointer type must match the data type
+
+int *p = a; is incorrect. It should be char *p = a;.
+Pointer arithmetic depends on type size
+
+int *p++ moves 4 bytes forward, not 1.
+Reading 4 bytes at a time leads to unintended values
+
+*p tries to interpret 4 consecutive characters as an integer.
+Little-endian vs. Big-endian systems affect interpretation
+
+The integer values depend on byte order in memory.
+Would you like a deeper explanation of memory layout and pointer arithmetic? 😊
