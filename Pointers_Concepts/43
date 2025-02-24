@@ -1,0 +1,89 @@
+ #include <stdio.h>
+         void main()
+         {
+            char *s= "hello";
+            char *p = s;
+            printf("%c\t%c", 1[p], s[1]);
+         }
+ ///////////////////////////////////////////////////////////////////////////////////
+ Code:
+c
+Copy
+Edit
+#include <stdio.h>
+void main() 
+{
+    char *s = "hello";  
+    char *p = s; 
+    printf("%c\t%c", 1[p], s[1]);  
+}
+Step-by-Step Breakdown
+Step 1: Understanding Pointers and String Literals
+char *s = "hello";
+
+s is a pointer to the first character of the string "hello", stored in read-only memory (in older compilers) or read-write memory (in modern compilers if explicitly allocated).
+"hello" is stored as:
+sql
+Copy
+Edit
+Address    Value
+--------   -----
+s[0]       'h'
+s[1]       'e'
+s[2]       'l'
+s[3]       'l'
+s[4]       'o'
+s[5]       '\0' (null terminator)
+char *p = s;
+
+p is another pointer that points to the same string "hello".
+Step 2: Evaluating 1[p] and s[1]
+s[1]
+
+This is standard array notation, which means:
+c
+Copy
+Edit
+*(s + 1)   // Dereferencing pointer s at index 1
+It gives the second character of "hello", which is 'e'.
+1[p]
+
+This is unusual but valid C syntax.
+In C, array subscripting follows:
+c
+Copy
+Edit
+x[y] == *(x + y)
+So, 1[p] is equivalent to *(p + 1), which also accesses 'e'.
+Step 3: Printing the Values
+c
+Copy
+Edit
+printf("%c\t%c", 1[p], s[1]);
+The first %c prints 1[p], which is 'e'.
+The second %c prints s[1], which is also 'e'.
+Final Output:
+
+nginx
+Copy
+Edit
+e    e
+(\t adds a tab space between the characters.)
+
+Key Takeaways
+x[y] == y[x] is valid in C!
+
+Since array notation is just pointer arithmetic, 1[p] works the same as p[1] or *(p + 1).
+Pointer arithmetic is symmetric
+
+arr[i] is just a shorthand for *(arr + i), and it doesn't matter if we write it as i[arr].
+Use int main() instead of void main()
+
+void main() is not standard in C. Always use:
+c
+Copy
+Edit
+int main() {
+    return 0;
+}
+Would you like to explore more pointer tricks? 😊
