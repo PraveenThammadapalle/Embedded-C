@@ -1,0 +1,102 @@
+ #include<stdio.h> 
+      main() 
+      { 
+
+            int a[5]= {1,2,3,4,5}; 
+            int *ptr= (int *)(&a+1); 
+            
+            printf("%d %d\n",*(a+1),*(ptr-1)); 
+            
+            printf("%d %d\n",*(a+1),*(ptr)); 
+        }
+
+/////////////////////////////////////////////////////////
+
+Code:
+c
+Copy
+Edit
+#include<stdio.h> 
+
+main() 
+{ 
+    int a[5] = {1, 2, 3, 4, 5}; 
+    int *ptr = (int *)(&a + 1); 
+    
+    printf("%d %d\n", *(a + 1), *(ptr - 1));  
+    printf("%d %d\n", *(a + 1), *(ptr));  
+}
+Step-by-Step Analysis
+Step 1: Understanding a and &a
+a is an array of 5 integers:
+
+css
+Copy
+Edit
+Address    Value
+--------   -----
+a[0]       1
+a[1]       2
+a[2]       3
+a[3]       4
+a[4]       5
+Key Differences Between a and &a:
+
+a is a pointer to the first element (int *).
+&a is the address of the whole array (int (*)[5]).
+Step 2: ptr = (int *)(&a + 1);
+&a is the address of the array a[5] (of type int (*)[5]).
+&a + 1 moves by one entire array size, not by one int.
+Since a has 5 integers, &a + 1 moves 5 integers forward:
+less
+Copy
+Edit
+Address Calculation:
+&a       → Address of `a[0]`
+&a + 1   → Address right after `a[4]`
+(int *)(&a + 1) converts this to an int *, making ptr point to the memory just after a[4].
+Step 3: Evaluating printf("%d %d\n", *(a + 1), *(ptr - 1));
+*(a + 1):
+
+a + 1 points to a[1], which is 2.
+*(ptr - 1):
+
+ptr points just past a[4].
+ptr - 1 moves back one integer, pointing to a[4] (5).
+🔹 First output: 2 5
+
+Step 4: Evaluating printf("%d %d\n", *(a + 1), *(ptr));
+*(a + 1) = 2 (same as before).
+*(ptr):
+ptr is beyond a[4], so *(ptr) accesses out-of-bounds memory.
+Undefined Behavior 🚨 (could be garbage or crash).
+🔹 Expected output (if no crash): 2 ?
+(The second value is unpredictable because it's outside the array bounds.)
+
+Final Output (Typical Case)
+On most systems, if no crash occurs:
+
+php-template
+Copy
+Edit
+2 5
+2 <garbage_value>
+🚨 But the second printf may cause undefined behavior!
+
+Key Takeaways
+Understanding &a + 1:
+
+&a is the address of the whole array.
+&a + 1 moves forward by one full array size (5 integers).
+Accessing ptr - 1 works safely, but ptr itself is out-of-bounds.
+
+Avoid Undefined Behavior:
+
+The second printf accesses memory beyond the array.
+Safer alternative:
+c
+Copy
+Edit
+printf("%d %d\n", *(a + 1), *(ptr - 1)); // Safe
+Never access *(ptr) when ptr is out-of-bounds.
+Would you like me to clarify anything? 😊
