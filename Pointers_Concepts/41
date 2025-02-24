@@ -1,0 +1,17 @@
+ #include<stdio.h> 
+       main() 
+       { 
+       
+            int a=0x12345678; 
+            void *ptr; 
+            ptr=&a; 
+            printf("0x%x\n",*(int *)&*&*(char*)ptr); 
+       }
+
+
+Summary
+1. *(char*)ptr → Reads 1 byte (0x78).
+2. &*(char*)ptr → Gets the same address (ptr).
+3. *&*(char*)ptr → Cancels out to *(char*)ptr, which is 0x78.
+4. (int *)&*&*(char*)ptr → Casts ptr back to int*, essentially ptr itself.
+5. *(int *)&*&*(char*)ptr → Reads the full 4-byte int from ptr, giving 0x12345678.
