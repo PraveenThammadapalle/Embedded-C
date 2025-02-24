@@ -1,0 +1,66 @@
+#include<stdio.h>
+       main()
+       {
+             char a[]="abcde";
+             char *p=a;
+             p++;
+             p++;
+             p[2]='z';
+             printf("%s",p);
+       }
+///////////////////////////////////////////////////////////////
+#include<stdio.h>
+
+main()
+{
+    char a[] = "abcde";  // Character array (modifiable)
+    char *p = a;         // Pointer pointing to the first character ('a')
+
+    p++;  // Move to 'b'
+    p++;  // Move to 'c'
+
+    p[2] = 'z';  // Modifying the character at index 2 of `p`
+
+    printf("%s", p);  // Print the string from `p` onwards
+}
+
+
+Step-by-Step Execution
+Step 1: Memory Representation of a
+Since a is a character array, it is stored in modifiable memory:
+
+Address    Value
+--------   -----
+a[0]       'a'
+a[1]       'b'
+a[2]       'c'  <-- p (after p++)
+a[3]       'd'  <-- p[2]
+a[4]       'e'
+a[5]       '\0' (null terminator)
+
+
+Step 2: Pointer Manipulation
+p = a; → p points to 'a'
+p++ → Now p points to 'b'
+p++ → Now p points to 'c'
+
+Step 3: p[2] = 'z';
+p currently points to 'c', so p[2] means:
+*(p + 2) = 'z';
+p + 2 points to 'e', so 'e' is replaced by 'z'.
+Final state of a:
+Address    Value
+--------   -----
+a[0]       'a'
+a[1]       'b'
+a[2]       'c'  <-- p (starting point for printing)
+a[3]       'd'
+a[4]       'z'  <-- Modified
+a[5]       '\0'
+
+
+Step 4: Printing the String
+printf("%s", p);
+p now points to 'c', so printf("%s", p); prints the string starting from 'c':
+Final Output:
+cdz
