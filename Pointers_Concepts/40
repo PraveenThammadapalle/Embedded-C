@@ -1,0 +1,58 @@
+        #include<stdio.h> 
+        main() 
+        { 
+            char a[20]; 
+            char *p,*q; 
+            p = &a[0]; 
+            q = &a[10]; 
+            
+            printf("%d %d\n", q-p, &q-&p);  
+        }
+        
+///////////////////////////////////
+Expected Output:
+The first output (q - p) will always be 10.
+
+The second output (&q - &p) is undefined behavior in standard C, but typically:
+
+If q is stored at a higher memory address than p, the difference might be 1 or -1 depending on stack layout.
+It could be any other value depending on compiler optimizations.
+Warnings and Best Practices:
+Use int main() instead of main():
+
+In standard C, main should return an int (int main() instead of main()).
+Use %td for pointer differences:
+
+Instead of %d, use %td (format specifier for ptrdiff_t) to correctly print pointer differences:
+c
+Copy
+Edit
+printf("%td %td\n", q-p, &q-&p);
+Avoid &q - &p:
+
+This is not valid pointer arithmetic and should be avoided.
+Final Recommendation (Corrected Code):
+c
+Copy
+Edit
+#include<stdio.h>
+
+int main() 
+{ 
+    char a[20]; 
+    char *p, *q; 
+    p = &a[0]; 
+    q = &a[10]; 
+    
+    printf("%td\n", q - p); // Correct way to print pointer difference
+    return 0;
+}
+This ensures correct pointer arithmetic and avoids undefined behavior.
+
+
+
+
+
+
+
+
