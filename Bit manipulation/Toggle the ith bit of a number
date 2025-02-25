@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+int toggleBit(int num, int i) {
+    return num ^ (1 << i);  // XOR with (1 << i) flips the i-th bit
+}
+
+int main() {
+    int num, i;
+    
+    printf("Enter a number: ");
+    scanf("%d", &num);
+    
+    printf("Enter the bit position to toggle (0-based index): ");
+    scanf("%d", &i);
+
+    int result = toggleBit(num, i);
+
+    printf("Number after toggling bit %d: %d\n", i, result);
+    
+    return 0;
+}
