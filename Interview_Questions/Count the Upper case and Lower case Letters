@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <ctype.h>  // For isupper() and islower()
+
+void countCase(char *str, int *upper, int *lower) {
+    *upper = *lower = 0;  // Initialize counts
+
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (isupper(str[i])) {
+            (*upper)++;
+        } else if (islower(str[i])) {
+            (*lower)++;
+        }
+    }
+}
+
+int main() {
+    char str[] = "Hello World! Welcome to C Programming.";  // Example input
+    int uppercaseCount, lowercaseCount;
+
+    countCase(str, &uppercaseCount, &lowercaseCount);
+
+    printf("Uppercase Letters: %d\n", uppercaseCount);
+    printf("Lowercase Letters: %d\n", lowercaseCount);
+
+    return 0;
+}
+
+
+/////////////////////////////////
+Uppercase Letters: 5
+Lowercase Letters: 26
+
