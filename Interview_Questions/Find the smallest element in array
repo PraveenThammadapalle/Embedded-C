@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+// Function to find the smallest element
+int findSmallestElement(int arr[], int size) {
+    int min = arr[0];  // Assume first element is the smallest
+
+    for (int i = 1; i < size; i++) {
+        if (arr[i] < min) {  // If a smaller element is found, update min
+            min = arr[i];
+        }
+    }
+
+    return min;  // Return the smallest element
+}
+
+int main() {
+    int arr[] = {7, 2, 8, 1, 4, 9};  // Example array
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    int smallest = findSmallestElement(arr, size);
+
+    printf("The smallest element is: %d\n", smallest);
+
+    return 0;
+}
