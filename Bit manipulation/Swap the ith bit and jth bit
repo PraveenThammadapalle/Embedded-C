@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+unsigned int swapBits(unsigned int num, int i, int j) {
+    // Extract the i-th and j-th bits
+    int bit_i = (num >> i) & 1;
+    int bit_j = (num >> j) & 1;
+
+    // If bits are different, swap them using XOR
+    if (bit_i != bit_j) {
+        num ^= (1 << i);  // Toggle the i-th bit
+        num ^= (1 << j);  // Toggle the j-th bit
+    }
+
+    return num;
+}
+
+int main() {
+    unsigned int num;
+    int i, j;
+
+    printf("Enter a number: ");
+    scanf("%u", &num);
+    printf("Enter positions i and j to swap: ");
+    scanf("%d %d", &i, &j);
+
+    unsigned int result = swapBits(num, i, j);
+
+    printf("Number after swapping bit %d and bit %d: %u\n", i, j, result);
+
+    return 0;
+}
