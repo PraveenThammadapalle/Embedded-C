@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int countSetBits(int n) {
+    int count = 0;
+    while (n) {
+        n &= (n - 1); // Clears the rightmost set bit
+        count++;
+    }
+    return count;
+}
+
+int countBitsToFlip(int A, int B) {
+    return countSetBits(A ^ B); // XOR and count set bits
+}
+
+int main() {
+    int A, B;
+    
+    printf("Enter two numbers: ");
+    scanf("%d %d", &A, &B);
+
+    printf("Number of bits to flip to convert %d to %d: %d\n", A, B, countBitsToFlip(A, B));
+
+    return 0;
+}
