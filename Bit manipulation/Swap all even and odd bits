@@ -1,0 +1,102 @@
+
+#include <stdio.h>
+
+unsigned int swapEvenOddBits(unsigned int num) 
+{
+    return ((num & 0xAAAAAAAA) >> 1) | ((num & 0x55555555) << 1);
+}
+
+int main() {
+    unsigned int num;
+    printf("Enter a number: ");
+    scanf("%u", &num);
+
+    printf("After swapping even and odd bits: %u\n", swapEvenOddBits(num));
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+if input is 23 what is outpur explain for above code
+ChatGPT said:
+Let's go step by step to understand how the code swaps even and odd bits for the input 23.
+
+Step 1: Convert 23 to Binary
+yaml
+Copy
+Edit
+23 in binary (8-bit) → 0001 0111
+(Bit positions: 7 6 5 4 3 2 1 0)
+Even-positioned bits: 0 1 0 1
+Odd-positioned bits: 0 0 1 1
+
+Step 2: Apply Bit Masks
+We use two masks to extract even and odd bits:
+
+Even-bit mask (0xAAAAAAAA = 10101010 10101010 10101010 10101010)
+Odd-bit mask (0x55555555 = 01010101 01010101 01010101 01010101)
+Extract Even Bits (num & 0xAAAAAAAA)
+yaml
+Copy
+Edit
+  0001 0111    (23 in binary)
+& 1010 1010    (Mask for even bits)
+------------
+  0000 0010    (Only even bits remain)
+Result: 0000 0010 (2 in decimal)
+
+Extract Odd Bits (num & 0x55555555)
+yaml
+Copy
+Edit
+  0001 0111    (23 in binary)
+& 0101 0101    (Mask for odd bits)
+------------
+  0001 0101    (Only odd bits remain)
+Result: 0001 0101 (21 in decimal)
+
+Step 3: Swap Even and Odd Bits
+Shift even bits right (even_bits >> 1):
+
+yaml
+Copy
+Edit
+0000 0010  →  0000 0001  (1 in decimal)
+Shift odd bits left (odd_bits << 1):
+
+yaml
+Copy
+Edit
+0001 0101  →  0010 1010  (42 in decimal)
+Step 4: Combine Results
+Using bitwise OR (|), we merge the swapped bits:
+
+yaml
+Copy
+Edit
+  0000 0001  (Shifted even bits)
+| 0010 1010  (Shifted odd bits)
+------------
+  0010 1011  (Binary result)
+This equals 43 in decimal.
+
+Final Output
+yaml
+Copy
+Edit
+Input:  23  (0001 0111)
+Output: 43  (0010 1011)
+Quick Recap
+Extract even and odd bits separately using masks.
+Shift even bits right, odd bits left.
+Combine the results using OR (|).
+The function efficiently swaps even and odd bits with just a few operations! 🚀
+
+Let me know if you need more explanation! 😊
