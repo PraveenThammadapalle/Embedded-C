@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+// Macro to toggle a bit at a given position
+#define TOGGLE_BIT(num, pos) ((num) ^ (1 << (pos)))
+
+int main() {
+    int num = 23;  // Example number (Binary: 10111)
+
+    printf("Original Number: %d (Binary: %X)\n", num, num);
+
+    // Toggle 3rd (bit position 2) and 5th (bit position 4) bits
+    num = TOGGLE_BIT(num, 2);  // Toggle 3rd bit (position 2)
+    num = TOGGLE_BIT(num, 4);  // Toggle 5th bit (position 4)
+
+    printf("After Toggling 3rd and 5th Bit: %d (Binary: %X)\n", num, num);
+
+    return 0;
+}
+////////////////////////
+Original Number: 23 (Binary: 17)
+After Toggling 3rd and 5th Bit: 3 (Binary: 3)
