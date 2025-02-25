@@ -1,0 +1,22 @@
+#include <stdio.h>
+
+void checkBit(int num, int i) {
+    if (num & (1 << i))  // Left shift 1 by i positions and AND with num
+        printf("Bit %d is SET (1)\n", i);
+    else
+        printf("Bit %d is NOT SET (0)\n", i);
+}
+
+int main() {
+    int num, i;
+    
+    printf("Enter a number: ");
+    scanf("%d", &num);
+    
+    printf("Enter the bit position to check (0-based index): ");
+    scanf("%d", &i);
+
+    checkBit(num, i);
+
+    return 0;
+}
