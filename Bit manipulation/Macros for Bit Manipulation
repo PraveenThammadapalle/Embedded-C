@@ -1,0 +1,34 @@
+#include <stdio.h>
+
+// Macros for Bit Manipulation
+#define SET_BIT(num, pos)     ((num) | (1 << (pos)))    // Set the bit at 'pos'
+#define CLEAR_BIT(num, pos)   ((num) & ~(1 << (pos)))   // Clear the bit at 'pos'
+#define TOGGLE_BIT(num, pos)  ((num) ^ (1 << (pos)))    // Toggle the bit at 'pos'
+
+int main() {
+    int num = 23;  // Example number (Binary: 10111)
+    int pos = 2;   // Bit position to modify (0-based index)
+
+    printf("Original Number: %d (Binary: %X)\n", num, num);
+
+    // Set the bit
+    num = SET_BIT(num, pos);
+    printf("After Setting Bit %d: %d (Binary: %X)\n", pos, num, num);
+
+    // Clear the bit
+    num = CLEAR_BIT(num, pos);
+    printf("After Clearing Bit %d: %d (Binary: %X)\n", pos, num, num);
+
+    // Toggle the bit
+    num = TOGGLE_BIT(num, pos);
+    printf("After Toggling Bit %d: %d (Binary: %X)\n", pos, num, num);
+
+    return 0;
+}
+
+
+/////////////////////
+Original Number: 23 (Binary: 17)
+After Setting Bit 2: 23 (Binary: 17)
+After Clearing Bit 2: 19 (Binary: 13)
+After Toggling Bit 2: 23 (Binary: 17)
