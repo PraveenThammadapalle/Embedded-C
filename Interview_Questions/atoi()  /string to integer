@@ -1,0 +1,40 @@
+#include <stdio.h>
+
+// Function to convert string to integer
+int myAtoi(char *str) {
+    int result = 0;  
+    int sign = 1;  // Positive by default
+    int i = 0;
+
+    // Handle leading whitespaces
+    while (str[i] == ' ')
+        i++;
+
+    // Handle sign
+    if (str[i] == '-' || str[i] == '+') {
+        if (str[i] == '-') 
+            sign = -1;
+        i++;
+    }
+
+    // Convert characters to integer
+    while (str[i] >= '0' && str[i] <= '9') {
+        result = result * 10 + (str[i] - '0');
+        i++;
+    }
+
+    return result * sign;
+}
+
+int main() {
+    char str[100];
+
+    printf("Enter a number as a string: ");
+    scanf("%s", str);
+
+    int num = myAtoi(str);
+
+    printf("Converted integer: %d\n", num);
+
+    return 0;
+}
