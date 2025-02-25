@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_CHAR 256  // Total ASCII characters
+
+void removeDuplicates(char *str) {
+    int hash[MAX_CHAR] = {0};  // Array to track characters
+    int index = 0;  // Index for unique characters
+
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (hash[(unsigned char)str[i]] == 0) {  // If character not seen before
+            hash[(unsigned char)str[i]] = 1;
+            str[index++] = str[i];  // Keep the character
+        }
+    }
+    str[index] = '\0';  // Null-terminate the string
+}
+
+int main() {
+    char str[] = "programming";  // Example input
+
+    printf("Original String: %s\n", str);
+    removeDuplicates(str);
+    printf("String after Removing Duplicates: %s\n", str);
+
+    return 0;
+}
+
+/////////////////////////////////////////////
+Original String: programming
+String after Removing Duplicates: progamin
