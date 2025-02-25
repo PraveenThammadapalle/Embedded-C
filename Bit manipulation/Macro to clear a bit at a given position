@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+// Macro to clear a bit at a given position
+#define CLEAR_BIT(num, pos) ((num) & ~(1 << (pos)))
+
+int main() {
+    int num = 23;  // Example number (Binary: 10111)
+
+    printf("Original Number: %d (Binary: %X)\n", num, num);
+
+    // Clear 3rd (bit position 2) and 5th (bit position 4) bits
+    num = CLEAR_BIT(num, 2);  // Clear 3rd bit (position 2)
+    num = CLEAR_BIT(num, 4);  // Clear 5th bit (position 4)
+
+    printf("After Clearing 3rd and 5th Bit: %d (Binary: %X)\n", num, num);
+
+    return 0;
+}
+///////////////////////////////////////
+Original Number: 23 (Binary: 17)
+After Clearing 3rd and 5th Bit: 3 (Binary: 3)
