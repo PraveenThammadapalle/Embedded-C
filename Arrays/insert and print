@@ -1,0 +1,20 @@
+#include<stdio.h>
+int main()
+{
+    int arr[5];
+    int size = sizeof(arr)/sizeof(arr[0]);
+    int i;
+    printf("enter 5 elements into the array:\n");
+    for(i=0;i<size;i++)
+        {
+            printf("elements %d:",i+1);
+            scanf("%d",&arr[i]);
+        }
+    printf("\n elements into the array:");
+    for(i=0;i<size;i++)
+        {
+            printf("%d",arr[i]);
+        }
+    printf("\n");
+    return 0;
+}
