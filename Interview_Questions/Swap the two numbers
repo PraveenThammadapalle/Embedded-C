@@ -1,0 +1,24 @@
+//Swap the two numbers
+#include <stdio.h>
+
+int main()
+{
+    int num1, num2;
+    
+    printf("Enter two numbers\n");
+     scanf("%d %d", &num1, &num2);   
+    printf("Number1 original Number is %d\n", num1);
+    printf("Number2 original Number is %d\n", num2);
+   
+    num1^=num2;
+    num2^=num1;
+    num1^=num2;
+
+    printf("%d", num1);
+    printf("%d", num2);
+    
+    printf("after swap Number1 is  %d\n", num1);
+    printf("after swap Number2 is %d\n", num2);
+
+    return 0;
+}
