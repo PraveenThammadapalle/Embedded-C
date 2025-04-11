@@ -1,0 +1,43 @@
+//Bubble sort
+// AMD interview Questions
+// 1. Bubble sor.
+// 2. print the array assending / decending order
+// 3. find the largest (2nd, 3rd, ..etc) element in array.
+// 4. find the smallest(1st, 2nd, 3rd ..etc) element's in array
+
+#include<stdio.h>
+
+int main()
+{
+    int arr[] = {11,22,23,43,65,78,99,10,7};
+    int size = sizeof(arr)/sizeof(arr[0]);
+    
+    int temp;
+    
+    for (int i=0; i<size-1;i++)
+    {
+        for(int j=0;j<size-1-i;j++)
+        {
+            //if(arr[j]>arr[j+1])   //accending order
+            if(arr[j]<arr[j+1])    //deccending order
+            {
+                temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+        }
+    }
+//based on condition print the message
+    printf("sorted array:");
+    //printf("Elemts in accending order:");  //same for bubble sort and accending order small to high
+        printf("Elemts in deccending order:");  //same for bubble sort and accending order high to small
+    for(int i=0; i<size;i++)
+    {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+    
+    printf("2nd largest element in array: %d", arr[2]);   //after deccending order only we find the 2nd 3rd largest element
+// and after accending order only we find the 2nd and 3rd and 4rt smallest elemt in the array
+    return 0;
+}
