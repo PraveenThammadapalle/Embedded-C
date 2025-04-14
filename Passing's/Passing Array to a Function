@@ -1,0 +1,32 @@
+//Passing an Array to a Function
+
+#include <stdio.h>
+
+void processArray(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        arr[i] *= 2; // Modifying the original array
+    }
+}
+
+int main() {
+    int numbers[] = {1, 2, 3, 4, 5};
+    int size = sizeof(numbers) / sizeof(numbers[0]); // Calculate the size of the array
+
+    printf("Original array: ");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", numbers[i]);
+    }
+    printf("\n");
+
+    processArray(numbers, size); // Passing the array to the function
+
+    printf("Modified array: ");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", numbers[i]);
+    }
+    printf("\n");
+}
+
+output: 
+Original array: 1 2 3 4 5 
+Modified array: 2 4 6 8 10 
