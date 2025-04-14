@@ -1,0 +1,17 @@
+#include <stdio.h>
+
+// Function to print string with its length
+void printStringWithLength(char *str, int length) {
+    printf("The string is: %.*s\n", length, str);  // Print up to the length
+}
+
+int main() {
+    char myString[] = "Hello, World!";
+
+    // Pass the string along with its length
+    printStringWithLength(myString, 5);  // Only prints first 5 characters
+
+    return 0;
+}
+
+Output: The string is: Hello
