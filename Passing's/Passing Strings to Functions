@@ -1,0 +1,13 @@
+#include <stdio.h>
+
+void printString(char *str) {
+    printf("String: %s\n", str);
+}
+
+int main() {
+    char str[] = "Hello, World!";
+    printString(str);  // Passes the string to the function
+    return 0;
+}
+
+Output: String: Hello, World!
