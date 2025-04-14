@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+// Function to print a string passed by pointer
+void printString(char *str) {
+    printf("The string is: %s\n", str);
+}
+
+int main() {
+    // Declare a string (array of characters)
+    char myString[] = "Hello, World!";
+
+    // Pass the string to the function
+    printString(myString);
+
+    return 0;
+}
+
+Outpur: The string is: Hello, World!
