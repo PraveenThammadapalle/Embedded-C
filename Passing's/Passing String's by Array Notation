@@ -1,0 +1,17 @@
+#include <stdio.h>
+
+#include <stdio.h>
+
+// Function to print a string (array notation)
+void printString(char str[]) {
+    printf("The string is: %s\n", str);
+}
+
+int main() {
+    char myString[] = "Hello, C!";
+
+    // Pass the string to the function
+    printString(myString);
+
+    return 0;
+}
