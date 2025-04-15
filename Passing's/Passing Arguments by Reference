@@ -1,0 +1,16 @@
+#include <stdio.h>
+
+// Function to modify a variable
+void modify(int *n) {
+    *n = 100;  // Modify the value at the address pointed to by 'n'
+}
+
+int main() {
+    int num = 10;
+    printf("Before: %d\n", num);
+    
+    modify(&num);  // Pass the address of num
+    printf("After: %d\n", num);
+    
+    return 0;
+}
