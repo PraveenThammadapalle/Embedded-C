@@ -1,0 +1,17 @@
+#include <stdio.h>
+
+// A function that performs an operation on two integers
+void operate(int a, int b, int (*operation)(int, int)) {
+    int result = operation(a, b); // Call the function via pointer
+    printf("Result: %d\n", result);
+}
+
+// A function that returns the product of two integers
+int multiply(int a, int b) {
+    return a * b;
+}
+
+int main() {
+    operate(4, 5, multiply); // Pass the multiply function pointer
+    return 0; // Outputs: Result: 20
+}
