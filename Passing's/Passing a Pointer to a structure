@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+// Define a structure
+struct Point {
+    int x;
+    int y;
+};
+// Function to modify structure values
+void modifyPoint(struct Point *p) {
+    p->x = 10; // Modify x member
+    p->y = 20; // Modify y member
+}
+int main() {
+    struct Point pt = {1, 2};
+    printf("Before: pt.x = %d, pt.y = %d\n", pt.x, pt.y);
+
+    // Pass the address of pt to the function
+    modifyPoint(&pt);
+    printf("After: pt.x = %d, pt.y = %d\n", pt.x, pt.y);
+    return 0;
+}
