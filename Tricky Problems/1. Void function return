@@ -1,0 +1,187 @@
+Problem 1:
+
+#include<stdio.h>
+
+typedef unsigned short uint16_t;
+typedef unsigned char uint8_t;
+
+void *add2nums(uint8_t a,uint8_t b);
+
+int main(void){
+	
+	uint16_t* sum_1 = add2nums(100,120);
+	printf("%u,expected answer is 220\n",*sum_1);
+	sum_1 = add2nums(123,210);
+	printf("%u,expected answer is 333\n",*sum_1);
+	return 0;	
+		
+}
+
+void *add2nums(uint8_t a,uint8_t b){
+		
+uin8_t sum = 0;
+sum = a+b;
+return &sum;	
+	
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------
+Problem 2:
+  
+#include<stdio.h>
+
+typedef unsigned short uint16_t;
+typedef unsigned char uint8_t;
+
+uint16_t sum = 0;
+
+void *add2nums(uint8_t a,uint8_t b);
+
+int main(void){
+	
+	printf("address of sum %p\n",&sum);
+	uint16_t* sum_1 = add2nums(100,120);
+	printf("%u,expected answer is 220\n",*sum_1);
+	printf("address of sum with sum1 pointer %p\n",sum_1);
+	sum_1 = add2nums(123,210);
+	printf("%u,expected answer is 333\n",*sum_1);
+	return 0;	
+		
+}
+
+
+
+void *add2nums(uint8_t a,uint8_t b){
+
+//uint8_t sum = 0;
+
+sum = a+b;
+return &sum;	
+	
+}
+
+output:
+//tried with online gdb compiler 
+address of sum 0x55ba8389b012 
+220,expected answer is 220
+address of sum with sum1 pointer 0x55ba8389b012
+333,expected answer is 333
+
+===============================================================================================================================
+❌ Problem in the Original Code
+Your original function:
+void *add2nums(uint8_t a,uint8_t b){
+    uin8_t sum = 0;
+    sum = a+b;
+    return &sum;
+}
+
+❗ Big mistake:
+
+You are returning the address of a local variable (sum).
+
+What happens?
+
+sum is created inside the function → stored in the stack frame of the function.
+
+When the function returns → stack frame is destroyed → sum no longer exists.
+
+So you return a dangling pointer → pointing to memory that is invalid.
+
+This is undefined behavior.
+
+Sometimes:
+
+It prints garbage value
+
+It crashes
+
+It may even appear to work (but it's still wrong)
+
+✔ Why Your Second Code Works
+
+You changed:
+
+uint16_t sum = 0;   // global variable
+
+
+Now sum is global, stored in data segment, not on the stack.
+
+Global variable lifetime = entire program.
+So returning its address is valid.
+
+🧠 Memory Explanation (Interview-Level)
+❌ Case 1: Local variable
+add2nums() stack frame:
++------------+
+| sum = 220  |
++------------+
+
+return &sum  ---> INVALID after function ends
+
+
+After function returns:
+
+Stack memory reused → sum disappears
+
+✔ Case 2: Global variable
+.data section:
++-----------------+
+| sum (lives forever) |
++-----------------+
+
+
+This memory never gets deleted, so returning &sum is safe.
+
+⚠ But interviewer will still ask:
+
+Is the second solution correct in general?
+
+Correct answer:
+
+It works, but it is not good practice because:
+
+❌ Problems:
+
+Function is not re-entrant
+
+If called from interrupt + main → race condition
+
+Only one sum value can be stored
+
+Multiple calls overwrite the same variable
+
+Not thread-safe
+
+⭐ Best Professional Embedded C Solution (Recommended)
+Return by value (simple and safe):
+uint16_t add2nums(uint8_t a, uint8_t b){
+    return (uint16_t)(a + b);
+}
+
+int main(){
+    uint16_t result = add2nums(100,120);
+    printf("%u\n", result);
+}
+
+
+✔ Stack-safe
+✔ Re-entrant
+✔ No global variables
+✔ No pointer issues
+✔ No dynamic memory needed
+
+⭐ Alternative Embedded-Style (Return result using pointer)
+void add2nums(uint8_t a, uint8_t b, uint16_t *out)
+{
+    *out = a + b;
+}
+
+int main(void){
+    uint16_t sum;
+    add2nums(100,120, &sum);
+    printf("%u\n", sum);
+}
+
+
+This method is very common in drivers and HAL code.
