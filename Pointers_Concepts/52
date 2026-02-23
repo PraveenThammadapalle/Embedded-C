@@ -1,0 +1,22 @@
+// very good recursion + pointer trap question
+
+ #include<stdio.h>
+        void t1(char *q);
+        int main()
+        {
+            char *p;
+            p = "abcder";
+            t1(p);
+        }
+        void t1(char *q)
+        {
+            if(*q!='r')
+            {
+                putchar(*q);
+                t1(q++);
+            }
+        }
+///output:  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.................................. (print continuosly)
+Infinite recursion occurs.
+Stack overflow
+Program crashes
