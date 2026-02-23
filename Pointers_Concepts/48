@@ -1,0 +1,59 @@
+#include<stdio.h>
+
+int main()
+{
+
+        char a[]="Hello";
+        char *p= "Hai";
+        a ="Hai";
+        p ="Hello";
+        printf("%s  %s\n",a,p);
+        return 0;
+
+}
+/////////////////////////////////////
+//correct program
+#include<stdio.h>
+#include<string.h>
+
+int main()
+{
+
+    char a[]="Hello";
+    char *p="Hai";
+
+    strcpy(a,"Hai");   // copy into array
+    p="Hello";         // reassign pointer
+
+    printf("%s  %s\n",a,p);
+}
+//////////////////////////////////
+🎓 One-Line Interview Answer
+
+If interviewer shows this code, say:
+
+This program will not compile because array names are not assignable.
+We must use strcpy() to copy a new string into the array, while pointers can be reassigned directly.
+
+🧠 Interview Concept Being Tested
+
+This snippet checks whether you know:
+
+✔ array name is not assignable
+✔ pointer variable is assignable
+✔ difference between copying string and assigning pointer
+✔ string literal vs array storage
+
+char *strcpy(char *dest, const char *src);
+dest → where to copy
+src → what to copy
+returns pointer to dest
+
+What strcpy Does Internally:
+int i = 0;
+while(src[i] != '\0')
+{
+    dest[i] = src[i];
+    i++;
+}
+dest[i] = '\0';
