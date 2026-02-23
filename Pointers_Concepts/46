@@ -109,3 +109,12 @@ now 'a'
 a
 🎯 FINAL OUTPUT
 ecbaa
+
+
+🧠 FINAL MEMORY AFTER PROGRAM
+a[0] = 'a'
+a[1] = 'a'   (was b)
+a[2] = 'c'
+a[3] = 'b'   (was d)
+a[4] = 'e'
+a[5] = 'e'   (was f)
