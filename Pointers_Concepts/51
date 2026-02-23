@@ -1,0 +1,59 @@
+// classic pointer + array modification interview question.
+
+ #include <stdio.h>
+        void f(char *k)
+        {
+            k++;
+            k[2] = 'M';
+            printf("%c\n", *k);
+        }
+        void main()
+        {
+            char s[] = "hello";
+            f(s);
+            printf("%s\n",s);
+        }
+
+
+
+
+char s[] = "hello";
+f(s);
+printf("%s\n",s);
+
+So s is a writable array in RAM, not a literal pointer.
+This means modifications inside f() will affect the original string.
+
+🧠 Initial Memory of s
+Index : 0 1 2 3 4 5
+Value : h e l l o \0
+
+Pointer passed to function:
+
+k → s[0] ('h')
+🔎 Inside function f
+k++;
+
+Pointer moves one step forward:
+
+k → s[1] ('e')
+k[2] = 'M';
+
+Important:
+
+k[2]  ≡ *(k + 2)
+
+Since k is at s[1]:
+
+k+2 → s[3]
+
+So:
+
+s[3] = 'M'
+🧠 Updated Memory
+Index : 0 1 2 3 4 5
+Value : h e l M o \0
+
+String becomes:
+
+"helMo"
