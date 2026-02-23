@@ -1,0 +1,111 @@
+//pointer + string + pre/post decrement tricky C
+
+#include<stdio.h>
+ #include <string.h>
+ 
+ int main()
+  {
+        char a[]="abcdef";
+        char *ptr1 = a;
+        
+        ptr1 = ptr1+(strlen(ptr1)-1);
+        printf("%c", --*ptr1--);
+        printf("%c",--*--ptr1);
+        printf("%c",--*(ptr1--));
+        printf("%c",--*(--ptr1));
+        printf("%c",*ptr1);
+}
+
+//Step by Step Explanation
+///////////////////////////////////////
+Focus on :
+1.pointer position
+2.character value changes
+3.effect of -- on pointer vs value
+
+ptr1 → a[0] → 'a'
+
+ptr1 = ptr1 + (strlen(ptr1) - 1);  ==> strlen("abcdef") = 6 ==>   
+ptr1 = a + (6-1)
+ptr1 = a + 5
+ptr1 → a[5] → 'f'
+
+✅ LINE 1
+printf("%c", --*ptr1--);
+Operator precedence: --*ptr1-- ==> --(*(ptr1--))
+
+Step-by-step
+ptr1-- → use ptr1 first, then decrement pointer
+used position = a[5] ('f')
+ptr1 moves to a[4]
+*(old ptr1) = 'f'
+--'f' → 'e'
+
+✅ LINE 2
+Now Pointer at ==> ptr1 → a[4] ('e')
+printf("%c", --*--ptr1);
+
+Precedence:
+--*(--ptr1)
+Step-by-step
+
+--ptr1 → move pointer first
+ptr1 → a[3] ('d')
+*ptr1 = 'd'
+--'d' → 'c'
+✔ Output:
+c
+✔ Memory changed:
+a[3] now = 'c'
+
+✅ LINE 3
+
+printf("%c", --*(ptr1--));
+Precedence:
+--(*(ptr1--))
+
+Step-by-step
+
+use ptr1 first → a[3] ('c')
+then ptr1 moves to a[2]
+decrement value at old location
+
+'c' → 'b'
+✔ Output:
+b
+✔ pointer now:
+ptr1 → a[2]
+
+✅ LINE 4
+printf("%c", --*(--ptr1));
+
+Precedence:
+
+--*(--ptr1)
+Step-by-step
+
+--ptr1
+
+ptr1 → a[1] ('b')
+
+*ptr1 = 'b'
+
+--'b' → 'a'
+
+✔ Output:
+a
+
+✅ LINE 5
+printf("%c", *ptr1);
+ptr1 → a[1]
+
+But note:
+
+We modified a[1] in previous step:
+
+original 'b'
+now 'a'
+✔ Output:
+a
+🎯 FINAL OUTPUT
+ecbaa
