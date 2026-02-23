@@ -1,0 +1,55 @@
+#include<stdio.h>
+#include <string.h>
+
+int main()
+{
+        char str1[20] = "Hello";
+        //char *str1 = "Hello";
+        char *str2 = "Hai";
+        char *str3;
+        str3 = strcat(str1,str2);
+        printf("%s  %s\n",str3,str1);
+        return 0;
+}
+
+
+You are comparing:
+char *str1 = "Hello";   ❌ risky for modification
+char str1[20] = "Hello"; ✔ correct for modification
+
+Let’s explain clearly with memory diagrams and rules.
+
+🧠 1️⃣ What happens in
+char *str1 = "Hello";
+
+This does NOT create a string in writable memory.
+
+Instead:
+"Hello" is stored in read-only memory (ROM / .rodata section)
+str1 only stores the address of that memory
+
+Memory layout
+Read-only section:
+[ H e l l o \0 ]
+
+Stack:
+str1 → address of read-only string
+❗ Problem
+
+You cannot modify it:
+str1[0] = 'Y';   // ❌ Undefined behaviour
+
+May cause:
+segmentation fault
+crash
+
+char str1[20] = "Hello";
+Here:
+compiler creates real array in writable memory
+contents copied into array
+
+Memory layout
+Stack / RAM:
+[ H e l l o \0 _ _ _ _ _ ... ]
+
+str1 → actual array memory
