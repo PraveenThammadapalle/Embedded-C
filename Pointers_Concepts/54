@@ -1,0 +1,64 @@
+#include <stdio.h>
+        void foo( int [] );
+        int main()
+        {
+            int ary[4] = {1, 2, 3, 4};
+            foo(ary);
+            printf("%d ", ary[0]);
+        }
+        void foo(int p[])
+        {
+            int i = 10;
+            p = &i;
+            printf("%d ", p[0]);
+        }
+Output:
+10 1
+////////////////////////////////////
+printf("%d ", p[0]);  in this line why only when p[0] is printing 10, p[1],p[2],.... is getting address
+
+Great question 👍 — this is exactly the kind of detail interviewers want you to understand.
+
+You’re asking:
+
+When p = &i; and we do printf("%d", p[0]); it prints 10.
+But if I try p[1], p[2] etc., why do I see addresses or garbage values?
+
+Let’s explain clearly.
+
+🧠 1️⃣ What p = &i; really means
+int i = 10;
+p = &i;
+
+Memory:
+
+Address   Value
+1000      10   ← i
+
+So:
+
+p → 1000
+🧠 2️⃣ What p[0] means
+
+Array indexing rule:
+
+p[n] == *(p + n)
+
+So:
+
+p[0] == *(p+0) == *p == value at address of i == 10
+
+✔ Correct and valid.
+
+🧠 3️⃣ What p[1] means
+p[1] == *(p + 1)
+
+Pointer arithmetic on int *:
+
+p + 1 → address = 1000 + sizeof(int)
+
+Assume sizeof(int)=4
+
+p+1 → 1004
+
+Now program reads memory at address 1004.
