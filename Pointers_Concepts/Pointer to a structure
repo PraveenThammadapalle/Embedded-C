@@ -22,6 +22,8 @@ int main()
     //p->length = 20;    //  we can access structure variable this also
 
     p->breadth = 50;
+
+    //(*p).breadth = 60;  //we can also change like this
     
    // struct Rectangle *p;
    // p = (struct Rectangle *)malloc (sizeof(struct Rectangle));
@@ -32,3 +34,9 @@ int main()
         printf("breadth = %d", p->breadth);
 }
 
+
+////////////////////////
+Here r is a structure variable.
+p is a pointer to that structure.
+We use -> or (*p).member to access members through the pointer.
+This allows dynamic allocation and efficient passing of structures to functions.
