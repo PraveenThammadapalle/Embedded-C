@@ -1,0 +1,33 @@
+ #include<stdio.h>
+ 
+       int main()
+       {
+           int i;
+           float a=5.2;
+           char *ptr;
+           ptr = (char *)&a;
+           for(i=0; i<=3; i++)
+           printf("%d ", *ptr++);
+           return 0;
+       }
+
+////////////////////////////
+Nice 👍 this is a very common embedded/interview question testing:
+pointer casting
+memory representation of float
+endianness
+byte-wise access
+type punning
+
+👉 We take address of float
+👉 Cast it to char *
+👉 So we can read the raw bytes of the float.
+
+🧠 Step 1 — What does this mean?
+Normally:
+a → float value 5.2 (4 bytes)
+Now:
+ptr → points to first byte of that float
+Because char* reads memory 1 byte at a time.
+Let’s go step by step.
+
