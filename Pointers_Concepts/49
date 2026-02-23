@@ -1,0 +1,95 @@
+ #include<stdio.h>
+ #include <string.h>
+ 
+int main()
+{
+        int i,n;
+        char *x="Alice";
+        n = strlen(x);
+        *x = x[n];
+        for(i=0; i<=n; i++)
+        {
+            printf("%s",x);
+            x++;
+        }
+        printf("%s\n",x);
+        return 0;
+}
+
+///////////////////////////
+This program is 
+🚨 REAL ANSWER FOR INTERVIEW
+
+The correct answer is NOT the output.
+
+The correct answer is:
+
+This program has undefined behaviour because it tries to modify a string literal using *x = x[n].
+String literals are stored in read-only memory, so the program may crash with segmentation fault.
+
+To print "Alice" safely, you have a few correct options depending on what you want.
+
+✅ ✔ Option 1 — Just print the literal (simplest)
+
+If you only want to print it:
+
+#include<stdio.h>
+
+int main()
+{
+    char *x = "Alice";
+    printf("%s\n", x);
+}
+
+✔ Safe
+✔ No modification
+✔ Works always
+
+✅ ✔ Option 2 — If you want to modify the string later
+
+Then you must store it in writable array memory:
+
+#include<stdio.h>
+
+int main()
+{
+    char x[] = "Alice";   // array in RAM
+    printf("%s\n", x);
+}
+
+✔ Now modification is allowed:
+
+x[0] = 'M';   // becomes "Mlice"
+✅ ✔ Option 3 — Fix your original program but keep logic
+
+If your intention was to loop and print substrings but also print Alice first:
+
+Correct version:
+#include<stdio.h>
+#include<string.h>
+
+int main()
+{
+    int i,n;
+    char x[]="Alice";   // changed to array
+
+    n = strlen(x);
+
+    for(i=0; i<=n; i++)
+    {
+        printf("%s\n",x);
+        x[i] = x[i];   // no modification
+    }
+}
+🎯 Most Correct Interview Answer
+
+If interviewer asks:
+
+👉 How to safely print "Alice"?
+
+You say:
+
+If I only need to print it, I can use char *x = "Alice";.
+But if I need to modify it, I must use char x[] = "Alice"; so the string is stored in writable memory.
+
+That answer shows you understand memory sections.
