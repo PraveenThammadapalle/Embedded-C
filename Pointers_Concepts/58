@@ -1,0 +1,60 @@
+////////////classic dangerous pointer-to-pointer
+#include <stdio.h>
+        int main()
+        {
+            int i = 97, *p = &i;
+            foo(&p);
+            printf("%d ", *p);
+            return 0;
+        }
+        void foo(int **p)
+        {
+            int j = 2;
+            *p = &j;
+            printf("%d ", **p);
+        }
+
+
+//////////////////
+passing pointer by reference
+local variable lifetime
+dangling pointer problem
+
+❌ Problems in Your Code
+1️⃣ Missing function prototype
+
+foo() is used before definition.
+
+2️⃣ BIG logical bug (very important)
+int j = 2;
+*p = &j;      // ❌ assigning address of local variable
+
+j is local to foo().
+After function returns → j is destroyed.
+
+So p in main() becomes a dangling pointer.
+
+This leads to:
+undefined behaviour
+
+///////////correct version
+#include <stdio.h>
+
+void foo(int **p);
+
+int main()
+{
+    int i = 97;
+    int *p = &i;
+
+    foo(&p);
+
+    printf("%d ", *p);
+    return 0;
+}
+
+void foo(int **p)
+{
+    **p = 2;        // modify value safely
+    printf("%d ", **p);
+}
