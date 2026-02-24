@@ -29,3 +29,70 @@ p          → pointer
 *p         → pointer to int (int *)
 *const     → this pointer cannot be changed
 
+So:
+👉 p points to a const pointer to int
+
+Meaning:
+Expression	Allowed?	Why
+*p = something	❌ Not allowed	because *p is const pointer
+**p = value	✔ Allowed	value of int can change
+p = something	✔ Allowed	local pointer itself can change
+🚨 Problem in Your Code
+
+Inside foo():
+
+int j = 10;
+*p = &j;      // ❌ illegal
+
+Why illegal?
+
+Because:
+*p  is  int *const
+
+That means:
+👉 pointer stored in caller (p in main) cannot be reassigned
+
+Compiler should complain:
+assignment of read-only location '*p'
+⚠️ EVEN IF FORCED (very important)
+
+Suppose compiler allowed it (some don’t strictly block).
+
+Then:
+p in main → now points to j
+But j is local to foo().
+
+After return:
+j destroyed
+p becomes dangling pointer
+
+So final print:
+printf("%d", *p);
+
+👉 Undefined behaviour
+👉 may print garbage
+👉 may crash
+
+✅ Correct Version (Safe)
+
+If goal is to modify value:
+
+#include <stdio.h>
+void foo(int *const *p);
+int main()
+{
+    int i = 11;
+    int *p = &i;
+
+    foo(&p);
+
+    printf("%d ", *p);
+}
+void foo(int *const *p)
+{
+    **p = 10;   // modify value, not pointer
+    printf("%d ", **p);
+}
+🎯 Output (Correct Version)
+10 10
+
