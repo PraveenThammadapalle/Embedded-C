@@ -1,0 +1,70 @@
+// This program demonstrates returning dynamically allocated memory from a function using a pointer
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int *f();
+
+int main()
+{
+    int *p = f();
+    printf("%d\n", *p);
+}
+
+int *f()
+{
+    int *j = (int*)malloc(sizeof(int));
+    *j = 10;
+    return j;
+}
+
+///////////////////////////////////////
+2️⃣ What happens in main()
+int *p = f();
+f() returns a pointer to an integer.
+That pointer is stored in p.
+So after the call:
+p → memory allocated by malloc
+
+3️⃣ Inside function f()
+int *j = (int*)malloc(sizeof(int));
+malloc() allocates memory on the heap, not the stack.
+
+Example memory layout:
+Heap memory
+-----------
+Address 2000 : ??? (reserved by malloc)
+
+j → 2000
+Store value
+*j = 10;
+
+Memory becomes:
+
+Heap
+-----------
+2000 : 10
+
+j → 2000
+Return pointer
+return j;
+
+Now the returned pointer goes to main.
+
+p → 2000
+
+The heap memory still exists after function returns.
+
+4️⃣ Back in main()
+printf("%d\n", *p);
+
+*p means:
+
+value at address 2000
+
+Which is:
+
+10
+5️⃣ Output
+10
+6️⃣ Memory Layout Dia
