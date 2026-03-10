@@ -1,0 +1,38 @@
+ #include <stdio.h>
+        void main()
+        {
+            char *a[10] = {"hi", "hello", "how"};
+            printf("%d\n", sizeof(a));
+        }
+
+
+///////////////////////////////////
+This means:
+
+a is an array of 10 pointers to char
+
+Each element stores the address of a string.
+
+So memory looks like:
+
+a[0] → "hi"
+a[1] → "hello"
+a[2] → "how"
+a[3] → NULL (or uninitialized)
+...
+a[9]
+
+Important point:
+
+Even though only 3 strings are initialized, the array still has 10 pointer elements.
+
+2️⃣ Size of each element
+
+Each element is a pointer to char:
+
+char *
+
+On most systems:
+
+pointer size = 8 bytes (64-bit system)
+pointer size = 4 bytes (32-bit system)
