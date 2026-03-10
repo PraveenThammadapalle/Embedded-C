@@ -7,6 +7,8 @@
 
 
 ///////////////////////////////////
+Output: 80
+
 This means:
 
 a is an array of 10 pointers to char
