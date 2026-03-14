@@ -65,3 +65,7 @@ the program prints: hi
 These are all the same:
 *(a + 1)
 a[1]
+
+7️⃣ Key concept tested in interviews
+a[i] == *(a + i)
+This applies to arrays of pointers as well.
