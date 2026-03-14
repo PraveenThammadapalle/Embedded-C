@@ -1,0 +1,133 @@
+///////////////////////////////////////////////
+#include<stdio.h>
+#include<string.h>
+void fun(char **);
+int main()
+{
+        char *argv[]={"ab","cd","ef","gh"};
+        fun(argv);
+        return 0;
+}
+void fun(char **p)
+{
+        char *t;
+        t=(p+=sizeof(int))[-1];
+        printf("%s\n",t);
+}
+///////////////////////////////////////////////////////////
+1️⃣ Initial Memory
+
+In main:
+
+char *argv[]={"ab","cd","ef","gh"};
+
+Memory:
+
+argv[0] → "ab"
+argv[1] → "cd"
+argv[2] → "ef"
+argv[3] → "gh"
+
+When calling:
+
+fun(argv)
+
+p receives address of argv[0].
+
+p → argv[0]
+2️⃣ Expression inside fun
+t = (p += sizeof(int))[-1];
+
+Break it step by step.
+
+Step A — p += sizeof(int)
+
+Assume a 32-bit system:
+
+sizeof(int) = 4
+
+But p is char **, so pointer arithmetic moves 4 elements, not 4 bytes.
+
+p = p + 4
+
+So pointer becomes:
+p → argv[4]
+
+But array only has elements up to argv[3].
+
+So now:
+
+p → one element beyond the array
+Step B — [-1]
+
+Expression:
+
+(p += sizeof(int))[-1]
+
+means:
+
+*(p - 1)
+
+Since:
+
+p → argv[4]
+
+then:
+
+p[-1] → argv[3]
+3️⃣ Value stored in t
+t = argv[3]
+argv[3] → "gh"
+
+So:
+
+t → "gh"
+4️⃣ printf
+printf("%s\n",t);
+
+prints:
+
+gh
+5️⃣ Final Output
+gh
+6️⃣ Important Interview Concepts
+Pointer arithmetic rule
+p + n  → moves n elements
+
+not n bytes.
+
+Negative indexing
+p[-1] == *(p-1)
+7️⃣ Why sizeof(int) is confusing here
+
+Using
+
+p += sizeof(int)
+
+is dangerous because it depends on system size.
+
+Better version would be:
+
+p += 4;
+8️⃣ Safe mental model
+p → argv[0]
+p += 4 → argv[4]
+p[-1] → argv[3]
+
+///////////////////////////////////
+#include<stdio.h>
+#include <string.h>
+void fun(char **p)
+{
+    char *t;
+    t = (p += 2)[-1];
+    printf("%s\n", t);
+}
+
+int main()
+{
+    char *argv[] = {"ab","cd","ef","gh"};
+    fun(argv);
+    return 0;
+}   
+output: cd
