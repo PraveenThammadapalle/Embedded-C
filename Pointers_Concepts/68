@@ -1,0 +1,248 @@
+////////////////
+ #include <stdio.h>
+        int main(int argc, char *argv[])
+        {
+            while (argc--)
+            printf("%s\n", argv[argc]);
+            return 0;
+        }
+/////////////  This program demonstrates how command-line arguments (argc, argv) work in C and how the loop prints them in reverse order.
+2️⃣ Meaning of argc and argv
+argc
+
+Argument count
+
+Number of command-line arguments
+
+argv
+
+Argument vector
+
+Array of pointers to strings
+
+Structure:
+
+argv[0] → program name
+argv[1] → first argument
+argv[2] → second argument
+...
+argv[argc-1] → last argument
+
+Example execution:
+
+./prog apple banana mango
+
+Then:
+
+argc = 4
+
+Memory layout:
+
+argv[0] → "./prog"
+argv[1] → "apple"
+argv[2] → "banana"
+argv[3] → "mango"
+argv[4] → NULL
+3️⃣ Understanding the loop
+while (argc--)
+
+Post-decrement means:
+
+Use current value of argc
+
+Then decrease it
+
+Equivalent logic:
+
+while(argc != 0)
+{
+    argc--;
+    printf("%s\n", argv[argc]);
+}
+4️⃣ Iteration Example
+
+Command:
+
+./prog apple banana mango
+
+Initial:
+
+argc = 4
+Iteration 1
+argc-- → 4
+argc becomes 3
+argv[3] → "mango"
+
+Output:
+
+mango
+Iteration 2
+argc-- → 3
+argc becomes 2
+argv[2] → "banana"
+
+Output:
+
+banana
+Iteration 3
+argc-- → 2
+argc becomes 1
+argv[1] → "apple"
+
+Output:
+
+apple
+Iteration 4
+argc-- → 1
+argc becomes 0
+argv[0] → "./prog"
+
+Output:
+
+./prog
+5️⃣ Final Output
+mango
+banana
+apple
+./prog
+
+So the program prints command-line arguments in reverse order, including the program name.
+
+6️⃣ Important Concept
+
+argv is actually:
+
+char *argv[]
+
+which means:
+
+array of pointers to char
+
+So:
+
+argv[i] → pointer to string
+7️⃣ Equivalent for-loop
+
+The same logic could be written as:
+
+for(int i = argc-1; i >= 0; i--)
+    printf("%s\n", argv[i]);
+8️⃣ Key Interview Concept
+argv[i] == *(argv + i)
+
+Both access the same argument.
+
+If you'd like, I can also show a visual memory diagram of argc, argv, and the stack layout, which makes command-line arguments much easier to understand.
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+why printing only ./a.out
+
+Good question 👍
+If your program prints only ./a.out, it means you ran the program without passing any command-line arguments.
+
+Let’s understand clearly.
+
+1️⃣ Your Code
+#include <stdio.h>
+
+int main(int argc, char *argv[])
+{
+    while (argc--)
+        printf("%s\n", argv[argc]);
+    return 0;
+}
+2️⃣ When you run the program like this
+./a.out
+
+No extra arguments are given.
+
+So:
+
+argc = 1
+
+Memory:
+
+argv[0] → "./a.out"
+argv[1] → NULL
+3️⃣ Execution of the loop
+
+Initial value:
+
+argc = 1
+First iteration
+argc-- → uses 1
+argc becomes 0
+
+Then:
+
+argv[0] → "./a.out"
+
+So it prints:
+
+./a.out
+Next iteration
+argc = 0
+while(0) → false
+
+Loop stops.
+
+4️⃣ Output
+./a.out
+5️⃣ If you pass arguments
+
+Example:
+
+./a.out apple mango banana
+
+Then:
+
+argc = 4
+
+Memory:
+
+argv[0] → ./a.out
+argv[1] → apple
+argv[2] → mango
+argv[3] → banana
+
+Output (reverse order):
+
+banana
+mango
+apple
+./a.out
+6️⃣ Key rule
+argv[0] always stores the program name
+
+Even if you don't pass arguments.
+
+7️⃣ How to avoid printing program name
+
+If you only want user arguments:
+
+for(int i = argc-1; i > 0; i--)
+    printf("%s\n", argv[i]);
+
+STACK MEMORY
+──────────────────────────────
+argc = 4
+argv ──────────────┐
+                   │
+                   ▼
+        ┌─────────────────────┐
+        │ argv[0] → "./a.out" │
+        │ argv[1] → "apple"   │
+        │ argv[2] → "mango"   │
+        │ argv[3] → "banana"  │
+        │ argv[4] → NULL      │
+        └─────────────────────┘
+                   │
+                   │
+                   ▼
+        STRING STORAGE AREA
+        ┌─────────────────┐
+        │ "./a.out"       │
+        │ "apple"         │
+        │ "mango"         │
+        │ "banana"        │
+        └─────────────────┘
