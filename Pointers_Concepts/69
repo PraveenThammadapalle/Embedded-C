@@ -1,0 +1,173 @@
+////////////////////////////
+#include <stdio.h>
+
+int main(int argc, char *argv[])
+{
+    while (*++argv != NULL)
+        printf("%s\n", *argv);
+}
+
+//////////////////////////////////////////
+This program demonstrates pointer manipulation with argv. It is a bit tricky because argv itself is a pointer and is being incremented.
+
+Let’s analyze it carefully.
+
+1️⃣ Code
+#include <stdio.h>
+int main(int argc, char *argv[])
+{
+    while (*argv++ != NULL)
+        printf("%s\n", *argv);
+    return 0;
+}
+2️⃣ What argv contains
+
+If the program is run as:
+
+./a.out apple mango banana
+
+Then:
+
+argc = 4
+
+Memory structure:
+
+argv[0] → "./a.out"
+argv[1] → "apple"
+argv[2] → "mango"
+argv[3] → "banana"
+argv[4] → NULL
+
+Also remember:
+
+argv is a pointer to argv[0]
+3️⃣ Understanding the condition
+while (*argv++ != NULL)
+
+Important:
+
+*argv++  ≡ *(argv++)
+
+Meaning:
+
+Dereference argv
+
+Then increment argv
+
+4️⃣ Execution Step-by-Step
+
+Initial pointer:
+
+argv → argv[0] → "./a.out"
+Iteration 1
+
+Condition:
+
+*argv++  → "./a.out" (not NULL)
+
+Then argv moves to:
+
+argv → argv[1]
+
+Inside loop:
+
+printf("%s\n", *argv);
+
+Prints:
+
+apple
+Iteration 2
+
+Condition:
+
+*argv++ → "apple"
+
+Pointer moves to:
+
+argv → argv[2]
+
+Print:
+
+mango
+Iteration 3
+
+Condition:
+
+*argv++ → "mango"
+
+Pointer moves to:
+
+argv → argv[3]
+
+Print:
+
+banana
+Iteration 4
+
+Condition:
+
+*argv++ → "banana"
+
+Pointer moves to:
+
+argv → argv[4]
+
+Print:
+
+NULL → causes undefined behaviour
+
+Because:
+
+printf("%s", NULL)
+
+is invalid.
+
+5️⃣ Problem in the Code
+
+The loop eventually prints NULL pointer, which causes undefined behavior or crash.
+
+6️⃣ Correct Version
+
+Safer way:
+
+#include <stdio.h>
+
+int main(int argc, char *argv[])
+{
+    while (*++argv != NULL)
+        printf("%s\n", *argv);
+}
+
+Now the program prints only arguments (not program name).
+
+7️⃣ Output of Correct Version
+
+If run as:
+
+./a.out apple mango banana
+
+Output:
+
+apple
+mango
+banana
+8️⃣ Key Interview Concepts
+
+This question tests:
+
+argv pointer arithmetic
+
+difference between
+
+*argv++
+*(++argv)
+
+understanding pointer increments
+
+Important identities:
+
+argv[i] = *(argv + i)
+
+✅ Summary
+
+Original program prints command-line arguments but eventually tries to print a NULL pointer due to pointer increment logic.
