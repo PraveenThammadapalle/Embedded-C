@@ -1,0 +1,86 @@
+//////////////////////
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+        char *m[]={"jan","feb","mar"};
+        char d[][10] = {"sunhgjjghn","mon","tue"};
+        printf("%s\t",m[1]);
+        printf("%s\t",d[1]);
+}
+//////////////////////////////////////
+1️⃣ First declaration
+char *m[] = {"jan","feb","mar"};
+
+This means:
+
+m is an array of pointers to char
+
+Each element points to a string literal
+
+Memory concept:
+
+m[0] → "jan"
+m[1] → "feb"
+m[2] → "mar"
+
+These strings are stored in read-only memory.
+
+2️⃣ Second declaration
+char d[][10] = {"sun","mon","tue"};
+
+This means:
+
+d is a 2D character array
+
+Each row can store 10 characters
+
+Memory layout:
+
+d[0] = "sun"
+d[1] = "mon"
+d[2] = "tue"
+
+Actual storage:
+
+d
++----------+
+| s u n \0 |
+| m o n \0 |
+| t u e \0 |
++----------+
+(each row has space for 10 chars)
+3️⃣ First printf
+printf("%s\t",m[1]);
+
+m[1] → "feb"
+
+So it prints:
+
+feb
+4️⃣ Second printf
+printf("%s\t",d[1]);
+
+d[1] → "mon"
+
+So it prints:
+
+mon
+5️⃣ Final Output
+feb    mon
+
+(\t adds a tab space)
+
+6️⃣ Important difference between the two declarations
+Feature	                           char *m[]	                         char d[][10]
+Type	                             Array of pointers	                 2D character array
+Memory for strings	               Stored separately (read-only)	     Stored inside the array
+Can modify characters	             ❌ Not safe	                       ✅ Safe
+Example element	                    m[1] → pointer	                   d[1] → char array
+
+7️⃣ Interview Tip
+
+These two look similar but behave differently:
+
+char *m[] = {"jan","feb","mar"}   // array of pointers
+char d[][10] = {"sun","mon","tue"} // array of arrays
