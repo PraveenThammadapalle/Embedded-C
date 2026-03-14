@@ -1,0 +1,126 @@
+#include <stdio.h>
+        int main(int argc, char *argv[])
+        {
+            while (*argv  !=  NULL)
+            printf("%s\n", *(argv++));
+           return 0;
+        }
+
+
+
+///////////////////////////////////////
+Your program works correctly and prints all command-line arguments including the program name. Let’s break it down carefully.
+
+1️⃣ Code
+#include <stdio.h>
+int main(int argc, char *argv[])
+{
+    while (*argv != NULL)
+        printf("%s\n", *(argv++));
+    return 0;
+}
+2️⃣ What argc and argv represent
+
+If you run:
+
+./a.out apple mango banana
+
+Then:
+
+argc = 4
+
+Memory layout:
+
+argv[0] → "./a.out"
+argv[1] → "apple"
+argv[2] → "mango"
+argv[3] → "banana"
+argv[4] → NULL
+
+Also:
+
+argv → &argv[0]
+3️⃣ Understanding the loop condition
+while (*argv != NULL)
+
+*argv means:
+
+value stored at current argv pointer
+
+So it checks:
+
+argv[0], argv[1], argv[2], ...
+
+until it reaches NULL.
+
+4️⃣ Understanding the print statement
+printf("%s\n", *(argv++));
+
+Important rule:
+
+argv++  → use current pointer, then increment
+
+So:
+
+*(argv++) == current argument string
+
+Equivalent to:
+
+printf("%s\n", argv[i]);
+i++
+5️⃣ Step-by-step execution
+
+Initial pointer:
+
+argv → argv[0]
+Iteration 1
+*argv → "./a.out"
+print "./a.out"
+argv++
+Iteration 2
+*argv → "apple"
+print "apple"
+argv++
+Iteration 3
+*argv → "mango"
+print "mango"
+argv++
+Iteration 4
+*argv → "banana"
+print "banana"
+argv++
+Iteration 5
+*argv → NULL
+loop stops
+6️⃣ Output
+./a.out
+apple
+mango
+banana
+7️⃣ Equivalent simpler code
+
+Your code is equivalent to:
+
+for(int i = 0; argv[i] != NULL; i++)
+    printf("%s\n", argv[i]);
+8️⃣ Key concept tested in interviews
+
+Pointer arithmetic:
+
+argv[i] == *(argv + i)
+
+And:
+
+*(argv++) == argv[0], argv[1], argv[2] ...
+9️⃣ If you want to skip program name
+
+Use:
+
+while (*++argv != NULL)
+    printf("%s\n", *argv);
+
+Output would be:
+
+apple
+mango
+banana
