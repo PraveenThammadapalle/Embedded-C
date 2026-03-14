@@ -1,0 +1,94 @@
+#include<stdio.h>
+int main(int sizeofargv, char *argv[])
+{
+        while(sizeofargv)
+        printf("%s  ",argv[--sizeofargv]);
+        return 0;
+} 
+//if i/p is   sample  friday tuesday sunday
+
+
+
+///////////////////////////////////////////////////
+You mentioned the input (arguments):
+
+sample friday tuesday sunday
+1️⃣ Understanding sizeofargv
+
+You named the first parameter sizeofargv, but it is actually the argument count (argc).
+
+So if you run:
+
+./a.out sample friday tuesday sunday
+
+Then:
+
+sizeofargv = 5
+
+Because:
+
+argv[0] → ./a.out
+argv[1] → sample
+argv[2] → friday
+argv[3] → tuesday
+argv[4] → sunday
+argv[5] → NULL
+2️⃣ Understanding the loop
+while(sizeofargv)
+
+This runs until sizeofargv becomes 0.
+
+3️⃣ Important statement
+printf("%s ", argv[--sizeofargv]);
+
+This uses pre-decrement:
+
+--sizeofargv
+
+So the index decreases before accessing argv.
+
+4️⃣ Step-by-step execution
+
+Initial:
+
+sizeofargv = 5
+Iteration 1
+--sizeofargv → 4
+argv[4] → sunday
+
+Output:
+
+sunday
+Iteration 2
+--sizeofargv → 3
+argv[3] → tuesday
+
+Output:
+
+tuesday
+Iteration 3
+--sizeofargv → 2
+argv[2] → friday
+
+Output:
+
+friday
+Iteration 4
+--sizeofargv → 1
+argv[1] → sample
+
+Output:
+
+sample
+Iteration 5
+--sizeofargv → 0
+argv[0] → ./a.out
+
+Output:
+
+./a.out
+
+Loop ends because sizeofargv becomes 0.
+
+5️⃣ Final Output
+sunday tuesday friday sample ./a.out
