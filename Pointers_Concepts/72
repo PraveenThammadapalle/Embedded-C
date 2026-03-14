@@ -1,0 +1,86 @@
+///////////////////
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+    char *str[]={"Progs","Do","Not","Die","They","Croak!"};
+    printf("%d  %d",sizeof(str), strlen(str[0]));
+    return 0;
+}
+///////////////////////////////////////////
+1️⃣ Understanding the declaration
+char *str[] = {"Progs","Do","Not","Die","They","Croak!"};
+
+This means:
+
+str → array of pointers to char
+
+Number of elements = 6
+
+Memory conceptually:
+
+str[0] → "Progs"
+str[1] → "Do"
+str[2] → "Not"
+str[3] → "Die"
+str[4] → "They"
+str[5] → "Croak!"
+
+Each element is a pointer.
+
+2️⃣ sizeof(str)
+
+sizeof(str) gives the total size of the array of pointers, not the strings.
+
+Formula:
+
+sizeof(str) = number_of_elements × size_of_pointer
+
+Number of elements = 6
+
+Pointer size depends on system.
+
+On 64-bit system
+pointer size = 8 bytes
+sizeof(str) = 6 × 8 = 48
+On 32-bit system
+pointer size = 4 bytes
+sizeof(str) = 6 × 4 = 24
+3️⃣ strlen(str[0])
+str[0] → "Progs"
+
+Characters:
+
+P r o g s
+
+Length = 5
+
+strlen() does not count the null terminator \0.
+
+So:
+
+strlen("Progs") = 5
+4️⃣ Final Output
+On 64-bit system (most modern systems)
+48  5
+On 32-bit system
+24  5
+5️⃣ Memory Diagram
+str (array of 6 pointers)
++-------+     +--------+
+|str[0] |---->|"Progs" |
+|str[1] |---->|"Do"    |
+|str[2] |---->|"Not"   |
+|str[3] |---->|"Die"   |
+|str[4] |---->|"They"  |
+|str[5] |---->|"Croak!"|
++-------+
+
+Each pointer occupies 4 or 8 bytes, but the strings are stored elsewhere.
+
+6️⃣ Important Interview Concepts
+
+1️⃣ char *str[] → array of pointers
+2️⃣ sizeof(array) gives total array memory
+3️⃣ strlen() counts characters in a string
+4️⃣ Pointer size affects sizeof() result
