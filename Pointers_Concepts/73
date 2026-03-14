@@ -1,0 +1,99 @@
+/////////////////////pointer-to-pointer-to-pointer
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+
+static char *s[]={"black","white","pink","violet"};
+char **ptr[]={s+3,s+2,s+1,s},***p;
+p = ptr;
+printf("%s\n",**p+1);
+return 0;
+}
+
+
+
+///////////////////
+2️⃣ Understanding array s
+static char *s[]={"black","white","pink","violet"};
+
+s is an array of pointers to strings.
+
+Memory conceptually:
+
+s[0] → "black"
+s[1] → "white"
+s[2] → "pink"
+s[3] → "violet"
+3️⃣ Understanding ptr
+char **ptr[]={s+3,s+2,s+1,s};
+
+Each element of ptr stores an address inside array s.
+
+s+3 → &s[3]
+s+2 → &s[2]
+s+1 → &s[1]
+s   → &s[0]
+
+So:
+
+ptr[0] → s+3 → &s[3]
+ptr[1] → s+2 → &s[2]
+ptr[2] → s+1 → &s[1]
+ptr[3] → s   → &s[0]
+
+Visual:
+
+ptr
+│
+├─ ptr[0] → &s[3] → "violet"
+├─ ptr[1] → &s[2] → "pink"
+├─ ptr[2] → &s[1] → "white"
+└─ ptr[3] → &s[0] → "black"
+4️⃣ Pointer p
+char ***p;
+p = ptr;
+
+So:
+
+p → ptr[0]
+5️⃣ Evaluate **p
+
+Step by step:
+
+p → ptr[0]
+*p → s+3
+**p → s[3]
+s[3] → "violet"
+6️⃣ Expression **p + 1
+
+**p is the string:
+
+"violet"
+
+Adding +1 moves pointer one character ahead.
+
+"violet"
+ ^
+  +1
+
+New string:
+
+iolet
+7️⃣ printf
+printf("%s\n",**p+1);
+
+So it prints:
+
+iolet
+8️⃣ Final Output
+iolet
+9️⃣ Key Pointer Levels
+Expression	Meaning
+p	pointer to pointer to pointer
+*p	pointer to pointer
+**p	pointer to string
+**p + 1	second character of string
+🔟 Important Interview Concept
+**p = s[3] = "violet"
+**p + 1 → "iolet"
