@@ -1,0 +1,67 @@
+ #include <stdio.h>
+        int main()
+        {
+            char *a[2] = {"hello", "hi"};
+            printf("%s\n", *(a + 1));
+            return 0;
+        }
+////////////////////////////////////////////////
+1️⃣ Understanding the declaration
+char *a[2] = {"hello", "hi"};
+
+This means:
+
+a is an array of 2 pointers to char
+
+Memory representation:
+
+a[0] → "hello"
+a[1] → "hi"
+
+Each element stores the address of the first character of the string literal.
+
+Example layout:
+
+Stack
+------------------
+a[0] → address of "hello"
+a[1] → address of "hi"
+
+Read-only memory
+------------------
+"h e l l o \0"
+"h i \0"
+2️⃣ What a represents
+Array name a behaves like a pointer to its first element:
+
+a → &a[0]
+So:
+a + 1 → &a[1]
+3️⃣ Understanding *(a + 1)
+*(a + 1)
+
+Step by step:
+
+a + 1      → address of a[1]
+*(a + 1)   → value stored in a[1]
+
+But a[1] contains a pointer to the string "hi".
+
+So:
+
+*(a + 1) == a[1] == "hi"
+4️⃣ printf statement
+printf("%s\n", *(a + 1));
+
+%s prints a string starting from that pointer.
+
+Since:
+*(a + 1) → "hi"
+
+the program prints: hi
+
+5️⃣ Equivalent expressions
+
+These are all the same:
+*(a + 1)
+a[1]
