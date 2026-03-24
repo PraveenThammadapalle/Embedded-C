@@ -7,6 +7,10 @@ int main()
     *ptr += 1;
     printf("%d,%d\n", *ptr, a);
 }
+/////////////////////////////// 
+++(*ptr)   ===  value is pre-incremented in pointer
+//  ++ptr     ===  Pointer addreess will increment (depends data type)
+
 /////////////////////
 🔹 Step 1: Variable Declaration
 int *ptr, a = 10;
