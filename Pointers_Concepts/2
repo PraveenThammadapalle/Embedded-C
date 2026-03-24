@@ -1,0 +1,56 @@
+//////////////////
+#include <stdio.h>
+int main()
+{
+    int *ptr, a = 10;
+    ptr = &a;
+    *ptr += 1;
+    printf("%d,%d\n", *ptr, a);
+}
+/////////////////////
+🔹 Step 1: Variable Declaration
+int *ptr, a = 10;
+a is a normal integer variable → value = 10
+ptr is a pointer to an integer (it can store address of an int)
+
+👉 Memory view (example):
+
+a = 10   (stored at address say 1000)
+ptr = ?  (not initialized yet)
+🔹 Step 2: Assign Address
+ptr = &a;
+&a means address of variable a
+Now ptr stores that address
+
+👉 Memory view:
+
+a   = 10     (address 1000)
+ptr = 1000   (points to 'a')
+🔹 Step 3: Dereference and Modify
+*ptr += 1;
+
+Break it down:
+
+*ptr → go to address stored in ptr → access value of a
+So *ptr is actually same as a
+
+👉 Equivalent to:
+
+a = a + 1;
+
+👉 After execution:
+
+a = 11
+
+Memory:
+
+a   = 11     (address 1000)
+ptr = 1000   (still pointing to 'a')
+🔹 Step 4: Print Values
+printf("%d,%d\n", *ptr, a);
+*ptr → value at address → 11
+a → 11
+
+👉 Output:
+
+11,11
