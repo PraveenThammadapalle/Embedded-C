@@ -1,0 +1,68 @@
+/////////////////////  function pointer with arguments  ////////////////////////////
+#include <stdio.h>
+        int add(int a, int b)
+        {
+            return a + b;
+        }
+        int main()
+        {
+            int (*fn_ptr)(int, int);
+            fn_ptr = add;
+            printf("The sum of two numbers is: %d\n", (int)fn_ptr(2, 3));
+        }
+
+///////////////////////////////////
+🧠 1️⃣ Function definition
+int add(int a, int b)
+
+👉 Takes two integers
+👉 Returns their sum
+
+🧠 2️⃣ Function pointer declaration
+int (*fn_ptr)(int, int);
+
+👉 fn_ptr is a pointer to a function
+👉 Function signature must match:
+
+return type: int
+arguments: (int, int)
+🧠 3️⃣ Assign function to pointer
+fn_ptr = add;
+
+Equivalent to:
+fn_ptr = &add;
+
+👉 Now:
+fn_ptr → address of add()
+🧠 4️⃣ Calling function via pointer
+fn_ptr(2, 3)
+
+Equivalent to:
+add(2, 3)
+
+Steps:
+2 + 3 = 5
+
+🖨 5️⃣ printf
+printf("The sum of two numbers is: %d\n", (int)fn_ptr(2, 3));  //(int) cast
+//printf("The sum of two numbers is: %d\n", fn_ptr(2, 3));  
+👉 (int) cast is unnecessary (function already returns int)
+🎯 Output
+The sum of two numbers is: 5
+🧠 6️⃣ Clean Version (Best Practice)
+printf("The sum of two numbers is: %d\n", fn_ptr(2, 3));
+
+🧠 7️⃣ Function Pointer Syntax Breakdown
+int (*fn_ptr)(int, int);
+     ↑
+   pointer name
+
+Rule:
+
+return_type (*pointer_name)(parameters)
+🧠 8️⃣ Memory Concept
+fn_ptr ───► add() function
+
+When called:
+
+fn_ptr(2,3) → jumps to add() → returns 5
