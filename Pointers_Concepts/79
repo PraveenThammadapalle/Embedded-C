@@ -1,0 +1,90 @@
+///////////////////// function pointer passed as argument ////////////////////////
+#include<stdio.h>
+int fun(int (*)());
+int main()
+{
+    fun(main);
+    printf("Hi\n");
+    return 0;
+}
+int fun(int (*p)())
+{
+    printf("Hello\n");
+    return 0;
+}
+//////////////////
+
+🧠 1️⃣ Understanding function pointer parameter
+int fun(int (*p)());
+
+👉 fun takes a function pointer as argument
+👉 That pointer refers to a function returning int
+
+So inside fun, p can point to any function like:
+
+main
+add
+any function returning int
+🧠 2️⃣ What is passed?
+fun(main);
+
+👉 main is passed as a function pointer
+
+Equivalent to:
+
+fun(&main);
+
+So:
+
+p → main
+🧠 3️⃣ Inside function fun
+int fun(int (*p)())
+{
+    printf("Hello\n");
+    return 0;
+}
+
+👉 It does NOT use p at all
+👉 It just prints:
+
+Hello
+🧠 4️⃣ Back to main
+
+After returning from fun:
+printf("Hi\n");
+
+prints:
+Hi
+
+🖨 5️⃣ Final Output
+Hello
+Hi
+🧠 6️⃣ Important Observation
+
+Even though you passed:
+
+fun(main);
+
+👉 main() is NOT called inside fun
+
+Because you never used:
+
+p();   // missing
+🔥 7️⃣ If we modify the code
+int fun(int (*p)())
+{
+    printf("Hello\n");
+    p();   // calling main again
+    return 0;
+}
+
+👉 This will cause:
+
+infinite recursion
+main → fun → main → fun → ...
+🧠 8️⃣ Function Pointer Concept
+main is a function
+main can decay to a pointer
+
+So:
+main == &main
