@@ -1,0 +1,97 @@
+/////////function pointer chaining example///////////////
+ #include <stdio.h>
+        void first()
+        {
+            printf("first");
+        }
+        void second()
+        {
+            first();
+        }
+        void third()
+        {
+            second();
+        }
+            
+        void main()
+        {
+            void (*ptr)();
+            ptr = third;
+            ptr();
+        }
+
+Output: first
+/////////////////////
+
+🧠 1️⃣ What is ptr?
+void (*ptr)();
+
+👉 ptr is a pointer to a function
+👉 The function takes no arguments and returns void
+
+🧠 2️⃣ Assignment
+ptr = third;
+This means:
+ptr → address of function third
+
+🧠 3️⃣ Function call using pointer
+ptr();
+
+Equivalent to:
+
+third();
+🔁 4️⃣ Function Call Flow
+
+Let’s trace execution:
+
+main()
+  ↓
+ptr() → third()
+  ↓
+third() calls second()
+  ↓
+second() calls first()
+  ↓
+first() prints "first"
+🖨 5️⃣ Output
+first
+🧠 6️⃣ Call Stack View
+main
+ └── third
+      └── second
+           └── first
+
+Only first() prints output.
+
+🧠 7️⃣ Important Concepts
+✔ Function pointer syntax
+void (*ptr)();
+✔ Assign function to pointer
+ptr = third;
+✔ Call function using pointer
+ptr();   // same as third()
+🧠 8️⃣ Equivalent Normal Code
+int main()
+{
+    third();   // directly calling
+}
+
+Same output:
+
+first
+🎓 Interview One-Line Answer
+
+The function pointer ptr points to third(), which calls second(), which calls first(), so the final output is "first".
+
+🔥 Bonus (Interview Twist)
+
+If we change:
+
+void (*ptr)() = first;
+ptr();
+
+Output would be:
+
+first
+
+But no chaining happens.
