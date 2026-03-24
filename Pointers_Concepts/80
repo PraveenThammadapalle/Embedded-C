@@ -1,0 +1,74 @@
+////////////////////////////// very important (and tricky) C interview question ///////////////////////
+ #include<stdio.h>
+          int main()
+          {
+            char *p = "Hello World";
+            
+            printf(p);
+            }
+
+
+////////////////////////////////////////////////////////
+🧠 1️⃣ What is happening?
+char *p = "Hello World";
+
+👉 p points to string literal "Hello World"
+
+printf(p);
+
+Here is the key point:
+
+👉 printf expects a format string
+
+Prototype:
+
+int printf(const char *format, ...);
+
+So:
+
+printf(p);
+
+means:
+
+printf("Hello World");
+🖨 2️⃣ Output
+Hello World
+⚠️ 3️⃣ Why this is dangerous
+
+This works only because there is no format specifier.
+
+If string contains %, then:
+
+char *p = "Hello %d";
+printf(p);   // ❌ dangerous
+
+👉 printf will try to read an integer argument (which is not provided)
+
+This leads to:
+
+undefined behaviour
+❌ Example of problem
+char *p = "%x %x %x";
+printf(p);
+
+👉 May print:
+
+garbage values
+memory content
+or crash
+✅ 4️⃣ Correct way (safe)
+
+Always use format string:
+
+printf("%s", p);
+🧠 5️⃣ Why this is important (Interview point)
+
+This is related to:
+
+👉 Format string vulnerability
+
+Used in:
+
+hacking
+security exploits
+buffer attacks
